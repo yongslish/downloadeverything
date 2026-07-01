@@ -83,7 +83,7 @@
         <div class="section-heading">
           <p class="eyebrow"><span class="eyebrow-dot"></span> voice into text</p>
           <h2 id="transcribe-title">把视频里的声音，<br />变成能复盘的文字。</h2>
-          <p class="section-intro">先支持本地文件拖拽上传：可以用讯飞大模型或标准版进行真实转写，也可以用 Fake ASR 验证链路。页面会优先给你一份可复制的纯文字。</p>
+          <p class="section-intro">先支持本地文件拖拽上传：推荐使用免费的本地 FunASR 真实转写，也可以配置讯飞或使用 Fake ASR 验证链路。页面会优先给你一份可复制的纯文字。</p>
         </div>
 
         <form id="transcription-form" class="transcription-form" novalidate>
@@ -98,6 +98,7 @@
             <label class="quality-control" for="transcription-provider">
               <span>转写服务</span>
               <select id="transcription-provider" name="provider">
+                <option value="funasr-local">本地 FunASR（免费，无需 Key）</option>
                 <option value="xunfei-ifasr-llm">讯飞录音文件转写大模型</option>
                 <option value="fake" selected>Fake ASR（演示链路）</option>
                 <option value="xunfei-lfasr">讯飞录音文件转写标准版</option>

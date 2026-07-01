@@ -350,6 +350,8 @@ function processNextTranscription() {
 function friendlyTranscriptionError(error) {
   const message = error instanceof Error ? error.message : '转写时发生未知错误。';
   if (/FFmpeg/i.test(message)) return '服务器缺少 FFmpeg，真实转写前需要先安装 FFmpeg。';
+  if (/setup:funasr/i.test(message)) return '本地 FunASR 尚未安装，请先在项目目录运行 npm run setup:funasr。';
+  if (/FunASR.*(timeout|超时)/i.test(message)) return '本地 FunASR 转写超时，请换一个较短文件或调大 FUNASR_TIMEOUT_MS。';
   if (/file too large|File too large|LIMIT_FILE_SIZE/i.test(message)) return '文件超过当前 500 MB 上限，请压缩或截取后再试。';
   if (/尚未接入|provider/i.test(message)) return message;
   if (/aborted|cancel/i.test(message)) return '任务已经取消。';

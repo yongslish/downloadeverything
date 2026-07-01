@@ -48,6 +48,7 @@ const xunfeiSecretStorageKey = 'download-everything:xunfei-secrets:v1';
 
 const providerLabels = {
   fake: 'Fake ASR',
+  'funasr-local': '本地 FunASR',
   'xunfei-ifasr-llm': '讯飞大模型',
   'xunfei-lfasr': '讯飞转写',
 };
@@ -125,6 +126,9 @@ function getProviderConfig(provider) {
 }
 
 function transcriptionProviderHint(provider) {
+  if (provider === 'funasr-local') {
+    return '本地 FunASR 会在这台电脑上真实识别，不需要 API Key，也不会按次收费。';
+  }
   if (provider === 'xunfei-ifasr-llm') {
     return '讯飞大模型会真实识别音频；免费额度内适合先跑面试复盘。';
   }
@@ -425,15 +429,22 @@ async function checkEngine() {
     const response = await fetch('/api/health', { cache: 'no-store' });
     const health = await response.json();
     const providers = health.transcription?.providers || [];
+    const localFunAsr = providers.find?.((provider) => provider.id === 'funasr-local');
     const xunfeiLlm = providers.find?.((provider) => provider.id === 'xunfei-ifasr-llm');
     const xunfeiStandard = providers.find?.((provider) => provider.id === 'xunfei-lfasr');
-    if (xunfeiLlm?.configured) transcriptionProviderInput.value = 'xunfei-ifasr-llm';
+    if (localFunAsr?.configured) transcriptionProviderInput.value = 'funasr-local';
+    else if (xunfeiLlm?.configured) transcriptionProviderInput.value = 'xunfei-ifasr-llm';
     else if (xunfeiStandard?.configured) transcriptionProviderInput.value = 'xunfei-lfasr';
-    const transcriptionState = xunfeiLlm?.configured
-      ? '讯飞大模型已配置'
-      : xunfeiStandard?.configured
-        ? '讯飞标准版已配置'
-        : '讯飞转写待配置';
+    else transcriptionProviderInput.value = 'fake';
+    transcriptionProviderLabel.textContent = providerLabels[transcriptionProviderInput.value] || transcriptionProviderInput.value;
+    transcriptionNote.textContent = transcriptionProviderHint(transcriptionProviderInput.value);
+    const transcriptionState = localFunAsr?.configured
+      ? '本地 FunASR 已安装'
+      : xunfeiLlm?.configured
+        ? '讯飞大模型已配置'
+        : xunfeiStandard?.configured
+          ? '讯飞标准版已配置'
+          : '真实转写待安装或配置';
     engineState.textContent = health.engineReady ? `下载引擎已准备好 · ${transcriptionState}` : '首次使用：请运行 npm run setup';
     engineState.classList.toggle('engine-warning', !health.engineReady);
   } catch {

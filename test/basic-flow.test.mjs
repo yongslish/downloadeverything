@@ -17,6 +17,8 @@ let server;
 let xhsProvider;
 let fixtureDir;
 let xhsProviderUrl;
+let fakeFunAsrRunner;
+let fakeFfmpeg;
 
 test('adds anti-blocking request headers only for Bilibili', () => {
   const provider = new YtDlpProvider({
@@ -203,6 +205,30 @@ printf 'download fixture' > "$file"
 printf '[download] 100.0%% of 1.00MiB at 1.00MiB/s ETA 00:00\\n'
 `);
   await chmod(fakeEngine, 0o755);
+
+  fakeFunAsrRunner = path.join(fixtureDir, 'fake-funasr-runner.mjs');
+  await writeFile(fakeFunAsrRunner, `const valueAfter = (name) => process.argv[process.argv.indexOf(name) + 1];
+const language = valueAfter('--language') || 'auto';
+process.stdout.write(JSON.stringify({
+  text: '这是本地 FunASR 的集成测试转写。',
+  language: language === 'zh' ? 'zh-CN' : language,
+  duration: 6.5,
+  segments: [{ start: 0, end: 6.5, text: '这是本地 FunASR 的集成测试转写。' }],
+  raw: { model: 'fixture-model', device: 'cpu' }
+}));
+`);
+
+  fakeFfmpeg = path.join(fixtureDir, 'ffmpeg');
+  await writeFile(fakeFfmpeg, `#!/bin/sh
+if [ "$1" = "-version" ]; then
+  printf 'ffmpeg fixture\\n'
+  exit 0
+fi
+for last; do :; done
+printf 'controlled wav fixture' > "$last"
+`);
+  await chmod(fakeFfmpeg, 0o755);
+
   server = spawn(process.execPath, ['server.mjs'], {
     cwd: rootDir,
     env: {
@@ -212,6 +238,9 @@ printf '[download] 100.0%% of 1.00MiB at 1.00MiB/s ETA 00:00\\n'
       YTDLP_PATH: fakeEngine,
       XHS_API_URL: xhsProviderUrl,
       XHS_TEST_MEDIA_ORIGIN: xhsProviderUrl,
+      FFMPEG_PATH: fakeFfmpeg,
+      FUNASR_PYTHON_PATH: process.execPath,
+      FUNASR_RUNNER_PATH: fakeFunAsrRunner,
     },
     stdio: 'ignore',
   });
@@ -363,6 +392,49 @@ test('uploads local media and returns fake transcript exports', async () => {
   const vttResponse = await fetch(`${baseUrl}${completed.exports.vtt}`);
   assert.equal(vttResponse.status, 200);
   assert.match(await vttResponse.text(), /^WEBVTT/);
+
+  const deleteResponse = await fetch(`${baseUrl}/api/transcriptions/${created.id}`, { method: 'DELETE' });
+  assert.equal(deleteResponse.status, 204);
+});
+
+test('registers local FunASR and completes the upload-to-export integration flow', async () => {
+  const healthResponse = await fetch(`${baseUrl}/api/health`);
+  assert.equal(healthResponse.status, 200);
+  const health = await healthResponse.json();
+  const localProvider = health.transcription.providers.find((provider) => provider.id === 'funasr-local');
+  assert.deepEqual(localProvider, {
+    id: 'funasr-local',
+    label: '本地 FunASR（免费）',
+    configured: true,
+  });
+
+  const form = new FormData();
+  form.append('file', new Blob(['fixture media'], { type: 'audio/wav' }), 'lesson.wav');
+  form.append('provider', 'funasr-local');
+  form.append('language', 'zh-CN');
+
+  const createResponse = await fetch(`${baseUrl}/api/transcriptions/upload`, {
+    method: 'POST',
+    body: form,
+  });
+  assert.equal(createResponse.status, 202);
+  const created = await createResponse.json();
+  assert.equal(created.provider, 'funasr-local');
+
+  const completed = await waitForReadyTranscription(created.id);
+  assert.equal(completed.status, 'ready');
+  assert.equal(completed.provider, 'funasr-local');
+
+  const resultResponse = await fetch(`${baseUrl}/api/transcriptions/${created.id}/result`);
+  assert.equal(resultResponse.status, 200);
+  const result = await resultResponse.json();
+  assert.equal(result.transcription.provider, 'funasr-local');
+  assert.equal(result.transcription.text, '这是本地 FunASR 的集成测试转写。');
+  assert.equal(result.transcription.segments[0].end, 6.5);
+
+  const srtResponse = await fetch(`${baseUrl}${completed.exports.srt}`);
+  assert.equal(srtResponse.status, 200);
+  assert.match(await srtResponse.text(), /00:00:00,000 --> 00:00:06,500/);
 
   const deleteResponse = await fetch(`${baseUrl}/api/transcriptions/${created.id}`, { method: 'DELETE' });
   assert.equal(deleteResponse.status, 204);
