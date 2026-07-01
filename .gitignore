@@ -1,0 +1,10 @@
+node_modules/
+runtime/downloads/
+runtime/python/
+runtime/transcriptions/
+runtime/xhs-downloader/
+runtime/secrets.env
+runtime/setup.log
+runtime/xhs-cookie.txt
+bin/yt-dlp
+.DS_Store

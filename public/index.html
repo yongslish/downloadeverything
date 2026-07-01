@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f6f0" />
+    <meta name="description" content="Download Everything — 一个温和的一键下载工具，只处理公开链接。" />
+    <title>Download Everything — One click, softly.</title>
+    <link rel="stylesheet" href="/styles.css?v=20260626-xhs-cookie" />
+  </head>
+  <body>
+    <div class="page-glow glow-one"></div>
+    <div class="page-glow glow-two"></div>
+
+    <header class="site-header shell">
+      <a class="brand" href="/" aria-label="Download Everything 首页">
+        <span class="brand-mark">↓</span>
+        <span>down<span class="brand-light">space</span></span>
+      </a>
+      <span class="header-note">public links, private moment</span>
+    </header>
+
+    <main>
+      <section class="hero shell">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> one link · one quiet click</p>
+        <h1>Download everything<br /><em>in just one click.</em></h1>
+        <p class="intro">把想留下的内容，轻轻带走。支持公开的 YouTube、B站、抖音和小红书链接。</p>
+
+        <form class="download-form" id="download-form" novalidate>
+          <label class="sr-only" for="url">内容链接</label>
+          <div class="url-row">
+            <span class="link-icon" aria-hidden="true">↗</span>
+            <input id="url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="在这里粘贴一个链接…" required />
+            <button class="download-button" type="submit">
+              <span>开始下载</span><span aria-hidden="true">↓</span>
+            </button>
+          </div>
+          <div class="form-options">
+            <label class="quality-control" for="preset">
+              <span>下载方式</span>
+              <select id="preset" name="preset">
+                <option value="best">最佳画质</option>
+                <option value="standard">720p 或以下</option>
+                <option value="audio">仅音频 MP3</option>
+              </select>
+            </label>
+            <span class="form-assurance"><span class="lock">⌁</span> 不建账号 · 仅为当前任务暂存</span>
+          </div>
+          <details class="provider-secret-panel download-secret-panel">
+            <summary>小红书访问 Cookie（可选，提高成功率）</summary>
+            <p>匿名解析失败时，如果你自己的浏览器能打开这篇笔记，可以从小红书网页版请求里复制 Cookie 粘到这里。本工具只在当前下载任务里使用，不写入下载结果。</p>
+            <label class="cookie-field" for="xhs-cookie">
+              <span>Cookie</span>
+              <textarea id="xhs-cookie" name="xhsCookie" rows="3" autocomplete="off" placeholder="例如：a1=...; web_session=...; webId=..."></textarea>
+            </label>
+          </details>
+        </form>
+
+        <div class="source-row" aria-label="支持的平台">
+          <span>正在尝试理解：</span>
+          <span class="source-pill youtube">YouTube</span>
+          <span class="source-pill bilibili">bilibili</span>
+          <span class="source-pill douyin">抖音</span>
+          <span class="source-pill xiaohongshu">小红书</span>
+        </div>
+
+        <section id="task-card" class="task-card is-hidden" aria-live="polite" aria-atomic="true">
+          <div class="task-topline">
+            <span id="task-platform" class="task-platform">准备中</span>
+            <button id="cancel-button" class="quiet-button" type="button">取消任务</button>
+          </div>
+          <div class="task-copy">
+            <span id="task-status">正在准备下载…</span>
+            <strong id="task-progress">0%</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+          <p id="task-note" class="task-note">这个过程可能需要一点点时间。</p>
+          <a id="download-link" class="file-button is-hidden" href="#">下载到此设备 <span aria-hidden="true">↓</span></a>
+        </section>
+      </section>
+
+      <section class="transcribe shell" aria-labelledby="transcribe-title">
+        <div class="section-heading">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> voice into text</p>
+          <h2 id="transcribe-title">把视频里的声音，<br />变成能复盘的文字。</h2>
+          <p class="section-intro">先支持本地文件拖拽上传：可以用讯飞大模型或标准版进行真实转写，也可以用 Fake ASR 验证链路。页面会优先给你一份可复制的纯文字。</p>
+        </div>
+
+        <form id="transcription-form" class="transcription-form" novalidate>
+          <label id="drop-zone" class="drop-zone" for="transcription-file">
+            <input id="transcription-file" name="file" type="file" accept=".mp4,.mov,.mkv,.webm,.mp3,.m4a,.wav,.aac,.flac,audio/*,video/*" />
+            <span class="drop-icon" aria-hidden="true">↧</span>
+            <strong id="drop-title">把视频或音频拖到这里</strong>
+            <span id="drop-subtitle">支持 mp4 / mov / mp3 / m4a / wav，当前上限 500 MB。</span>
+          </label>
+
+          <div class="transcription-options">
+            <label class="quality-control" for="transcription-provider">
+              <span>转写服务</span>
+              <select id="transcription-provider" name="provider">
+                <option value="xunfei-ifasr-llm">讯飞录音文件转写大模型</option>
+                <option value="fake" selected>Fake ASR（演示链路）</option>
+                <option value="xunfei-lfasr">讯飞录音文件转写标准版</option>
+              </select>
+            </label>
+            <label class="quality-control" for="transcription-language">
+              <span>语言</span>
+              <select id="transcription-language" name="language">
+                <option value="auto">自动识别</option>
+                <option value="zh-CN">中文</option>
+                <option value="en">英文</option>
+              </select>
+            </label>
+            <button id="transcribe-button" class="download-button" type="submit">
+              <span>开始转文字</span><span aria-hidden="true">✦</span>
+            </button>
+          </div>
+
+          <details class="provider-secret-panel">
+            <summary>讯飞密钥（可选，只在本机使用）</summary>
+            <p>如果后端没有配置环境变量，可以在这里临时填写。大模型使用 APPID / APIKey / APISecret；标准版使用 APPID / SecretKey。</p>
+            <div class="secret-grid">
+              <label for="xunfei-app-id">
+                <span>APPID</span>
+                <input id="xunfei-app-id" name="xunfeiAppId" type="password" autocomplete="off" placeholder="从讯飞控制台复制" />
+              </label>
+              <label for="xunfei-api-key">
+                <span>APIKey（大模型）</span>
+                <input id="xunfei-api-key" name="xunfeiApiKey" type="password" autocomplete="off" placeholder="大模型服务使用" />
+              </label>
+              <label for="xunfei-api-secret">
+                <span>APISecret（大模型）</span>
+                <input id="xunfei-api-secret" name="xunfeiApiSecret" type="password" autocomplete="off" placeholder="大模型服务使用" />
+              </label>
+              <label for="xunfei-secret-key">
+                <span>SecretKey（标准版）</span>
+                <input id="xunfei-secret-key" name="xunfeiSecretKey" type="password" autocomplete="off" placeholder="标准版服务使用" />
+              </label>
+            </div>
+          </details>
+        </form>
+
+        <section id="transcription-card" class="task-card transcription-card is-hidden" aria-live="polite" aria-atomic="true">
+          <div class="task-topline">
+            <span id="transcription-provider-label" class="task-platform">Fake ASR</span>
+            <button id="transcription-cancel-button" class="quiet-button" type="button">取消任务</button>
+          </div>
+          <div class="task-copy">
+            <span id="transcription-status">正在准备转写…</span>
+            <strong id="transcription-progress">0%</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span id="transcription-progress-bar"></span></div>
+          <p id="transcription-note" class="task-note">Fake ASR 只用于验证链路，不代表真实识别效果。</p>
+          <div id="transcription-result" class="transcription-result is-hidden">
+            <textarea id="transcript-text" readonly aria-label="转录文本"></textarea>
+            <div class="export-row">
+              <button id="copy-transcript-button" class="quiet-button" type="button">复制全文</button>
+              <a id="export-txt" class="file-button" href="#">TXT</a>
+              <a id="export-srt" class="file-button" href="#">SRT</a>
+              <a id="export-vtt" class="file-button" href="#">VTT</a>
+              <a id="export-json" class="file-button" href="#">JSON</a>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="reflection shell">
+        <p class="quote-mark">“</p>
+        <blockquote>先把重要的留住。<br />其余的，交给时间。</blockquote>
+        <p>— 一点给自己的空白</p>
+      </section>
+
+      <section class="how shell" aria-labelledby="how-title">
+        <div class="section-heading">
+          <p class="eyebrow">made for little keepsakes</p>
+          <h2 id="how-title">不必复杂，<br />只需要三步。</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="step-number">01</span>
+            <h3>复制链接</h3>
+            <p>找到你想收藏的公开内容。</p>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <h3>轻轻粘贴</h3>
+            <p>我们会识别平台和下载方式。</p>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <h3>留在身边</h3>
+            <p>文件将下载到此刻使用的设备。</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="boundary shell">
+        <div class="boundary-icon" aria-hidden="true">♡</div>
+        <div>
+          <h2>留住内容，也留住边界。</h2>
+          <p>仅处理你有权保存的公开、非 DRM 内容；不支持付费、私密或需绕过访问限制的链接。任务完成后，临时文件会在 30 分钟内自动清理。</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer shell">
+      <p>downloadspace · made slowly, for everyday things.</p>
+      <span id="engine-state">正在检查下载引擎…</span>
+    </footer>
+
+    <script type="module" src="/app.js?v=20260626-xhs-cookie"></script>
+  </body>
+</html>
