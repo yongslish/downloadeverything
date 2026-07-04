@@ -1,0 +1,150 @@
+/* HP-01 · Pixel Retro 首页 — mirrors docs/mockups/pixel-homepage.html.
+ * All color values come from tokens.css --pxl-* so Kawaii and Y2K skins
+ * inherit the layout unchanged. */
+
+.hp-hero {
+  padding: 22px 20px 12px;
+  display: grid;
+  grid-template-columns: 1fr 128px;
+  gap: 16px;
+  align-items: center;
+}
+
+.hp-heading {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--pxl-text-primary);
+  line-height: 1.35;
+  margin: 0 0 4px;
+  letter-spacing: 1px;
+}
+.hp-heading .arrow {
+  color: var(--pxl-text-secondary);
+}
+
+.hp-support {
+  font-size: 11px;
+  color: var(--pxl-text-secondary);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.hp-url {
+  background: var(--pxl-surface-white);
+  border: 3px solid var(--pxl-frame);
+  display: flex;
+  align-items: stretch;
+}
+.hp-url__prefix {
+  padding: 10px 12px;
+  background: var(--pxl-bg);
+  border-right: 2px solid var(--pxl-frame);
+  font-size: 12px;
+  color: var(--pxl-text-primary);
+  font-weight: 500;
+}
+.hp-url__input {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--pxl-text-primary);
+  font-family: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.hp-url__input::placeholder {
+  color: var(--pxl-text-muted);
+}
+.hp-url__go {
+  background: var(--pxl-frame);
+  color: var(--pxl-bg);
+  border: none;
+  border-left: 3px solid var(--pxl-frame);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  letter-spacing: 2px;
+}
+.hp-url__go:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hp-pills {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+.hp-pill {
+  font-size: 10px;
+  padding: 3px 8px;
+  color: var(--pxl-text-primary);
+  border: 2px solid var(--pxl-frame);
+  letter-spacing: 1px;
+  font-weight: 500;
+  background: var(--pxl-bg);
+}
+.hp-pill--bilibili { background: var(--pxl-accent); }
+.hp-pill--xhs-image { background: var(--pxl-accent-4); }
+.hp-pill--xhs-video { background: var(--pxl-accent-2); }
+
+.hp-error {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--pxl-danger);
+  letter-spacing: 0.5px;
+}
+
+.hp-cards-section {
+  padding: 8px 20px 20px;
+}
+.hp-cards-label {
+  font-size: 10px;
+  color: var(--pxl-text-primary);
+  letter-spacing: 2.5px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.hp-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.hp-card {
+  background: var(--pxl-bg);
+  border: 3px solid var(--pxl-frame);
+  padding: 8px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.hp-card__thumb {
+  height: 42px;
+  background: var(--pxl-accent);
+  border: 2px solid var(--pxl-frame);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hp-card__thumb i {
+  font-size: 20px;
+  color: var(--pxl-text-primary);
+}
+.hp-card__title {
+  font-size: 10px;
+  color: var(--pxl-text-primary);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hp-card__meta {
+  font-size: 9px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 1.5px;
+}

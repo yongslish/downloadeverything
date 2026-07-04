@@ -1,0 +1,92 @@
+/* 5-slot Pixel skeleton — see docs/design-system.md §5.1.
+ * Slot order is fixed: [1] top-bar → [2] nav → [3] hero (child) → [4] cards
+ * (child) → [5] bottom-bar. Colors come from the --pxl-* variables so all three
+ * Pixel skins (retro / kawaii / y2k) share this exact DOM. */
+
+.pxl-frame-outer {
+  max-width: 704px;
+  margin: 0 auto;
+  background: #EEEEEE;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.pxl-shell {
+  background: var(--pxl-bg);
+  border: 4px solid var(--pxl-frame);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  color: var(--pxl-text-primary);
+}
+
+/* [1] top-bar */
+.pxl-top-bar {
+  background: var(--pxl-bg-top);
+  border-bottom: 4px solid var(--pxl-frame);
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pxl-top-bar .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--pxl-frame);
+  display: inline-block;
+}
+.pxl-top-bar .brand {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: var(--pxl-frame);
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+.pxl-top-bar .close {
+  font-size: 10px;
+  color: var(--pxl-frame);
+}
+
+/* [2] nav */
+.pxl-nav {
+  background: var(--pxl-bg);
+  border-bottom: 3px solid var(--pxl-frame-mid);
+  padding: 10px 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.pxl-nav a {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  color: var(--pxl-text-secondary);
+}
+.pxl-nav a.active {
+  color: var(--pxl-text-primary);
+  font-weight: 500;
+}
+.pxl-nav .spacer { flex: 1; }
+.pxl-nav .version {
+  font-size: 10px;
+  color: var(--pxl-text-secondary);
+}
+
+/* [3][4] body area — pages fill this */
+.pxl-body {
+  /* pages control their own padding; shell gives no default */
+}
+
+/* [5] bottom-bar */
+.pxl-bottom-bar {
+  background: var(--pxl-bg-top);
+  border-top: 4px solid var(--pxl-frame);
+  padding: 7px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--pxl-frame);
+  letter-spacing: 2px;
+  font-weight: 500;
+}

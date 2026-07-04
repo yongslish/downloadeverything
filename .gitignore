@@ -12,3 +12,10 @@ bin/yt-dlp
 .DS_Store
 __pycache__/
 *.pyc
+
+# Claude Code local settings
+.claude/
+
+# Vite build output — regenerated via `npm run web:build`.
+public/assets/
+public/index.html

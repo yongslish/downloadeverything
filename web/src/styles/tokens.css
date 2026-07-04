@@ -1,0 +1,100 @@
+/* Downspace design tokens — mirrors docs/design-system.md §3.
+ * Pixel Retro is the default skin; Kawaii + Y2K reuse the same 5-slot skeleton
+ * and just override the --pxl-* vars. Newspaper is a separate skeleton with
+ * its own --nws-* namespace, keyed on [data-theme="newspaper"].
+ */
+
+:root,
+[data-skin='pixel-retro'] {
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'JetBrains Mono', monospace;
+  --font-serif: 'Source Serif 4', 'Source Serif Pro', 'PingFang SC', 'Songti SC', Georgia, serif;
+
+  --pxl-bg: #E0F8D0;
+  --pxl-bg-top: #88C070;
+  --pxl-frame: #081820;
+  --pxl-frame-mid: #346856;
+  --pxl-accent: #88C070;
+  --pxl-text-primary: #081820;
+  --pxl-text-secondary: #346856;
+  --pxl-text-muted: #88C070;
+  --pxl-danger: #C13030;
+  --pxl-surface-white: #FFFFFF;
+
+  /* Three-way accent used by the platform pills and DownBot pieces.
+   * In Retro the palette is monochrome-ish; Kawaii and Y2K override with
+   * distinct hues per pill. */
+  --pxl-accent-1: #88C070;
+  --pxl-accent-2: #88C070;
+  --pxl-accent-3: #88C070;
+  --pxl-accent-4: #E0F8D0;
+
+  /* DownBot sprite fills — override per skin. */
+  --dbot-outline: #081820;
+  --dbot-hair: #346856;
+  --dbot-panel: #E0F8D0;
+  --dbot-body: #E0F8D0;
+  --dbot-heart: #346856;
+  --dbot-antenna-outer: #346856;
+  --dbot-antenna-inner: #88C070;
+
+  --brand-decor: '▓▒░ downspace ░▒▓';
+}
+
+[data-skin='kawaii'] {
+  --pxl-bg: #FFF6E9;
+  --pxl-bg-top: #FFEBC8;
+  --pxl-frame: #3A2418;
+  --pxl-frame-mid: #E0C89A;
+  --pxl-accent-1: #FF8B7C;
+  --pxl-accent-2: #FFB89A;
+  --pxl-accent-3: #B5E4C8;
+  --pxl-accent-4: #A5D6FA;
+  --pxl-text-primary: #3A2418;
+  --pxl-text-secondary: #7A5A38;
+  --pxl-surface-white: #FFFFFF;
+
+  --dbot-outline: #3A2418;
+  --dbot-hair: #FFB89A;
+  --dbot-panel: #FFF6E9;
+  --dbot-body: #FFFFFF;
+  --dbot-heart: #FF8B7C;
+  --dbot-antenna-outer: #FF8B7C;
+  --dbot-antenna-inner: #FFD57A;
+
+  --brand-decor: '◕◡◕ downspace ◕◡◕';
+}
+
+[data-skin='y2k'] {
+  --pxl-bg: #FFF0F7;
+  --pxl-bg-top: #FFFFFF;
+  --pxl-frame: #6B4EA8;
+  --pxl-frame-mid: #F8C8E0;
+  --pxl-accent-1: #FF3F8F;
+  --pxl-accent-2: #FFD84A;
+  --pxl-accent-3: #6BD5F0;
+  --pxl-accent-4: #B49BF4;
+  --pxl-text-primary: #2D1B3E;
+  --pxl-text-secondary: #7A6BAA;
+  --pxl-surface-white: #FFFFFF;
+
+  --dbot-outline: #6B4EA8;
+  --dbot-hair: #F8C8E0;
+  --dbot-panel: #FFF0F7;
+  --dbot-body: #FFFFFF;
+  --dbot-heart: #FF3F8F;
+  --dbot-antenna-outer: #FF3F8F;
+  --dbot-antenna-inner: #FFD84A;
+
+  --brand-decor: '✧✦ downspace ✦✧';
+}
+
+[data-theme='newspaper'] {
+  --nws-paper: #F0E6D2;
+  --nws-paper-dark: #E5D9BE;
+  --nws-paper-white: #FFFFFF;
+  --nws-ink: #2A2418;
+  --nws-ink-red: #8B2A1E;
+  --nws-ink-muted: #5A4834;
+  --nws-ink-hint: #8A7B6A;
+  --nws-rule: #C0B499;
+}

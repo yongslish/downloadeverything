@@ -827,6 +827,21 @@ app.delete('/api/notes/:id', async (req, res) => {
   }
 });
 
+// SPA fallback — the React Router deep links (/note/:id, /processing/:id,
+// /archive, /tools, /config) don't map to physical files. Anything that
+// wasn't handled by /api/*, express.static (which serves /, /assets/*,
+// /legacy/*), or an explicit route falls back to the built index.html so the
+// client-side router can render the target page.
+app.use((req, res, next) => {
+  if (req.method !== 'GET') return next();
+  if (req.path.startsWith('/api/')) return next();
+  if (req.path.startsWith('/legacy/')) return next();
+  if (req.path.startsWith('/assets/')) return next();
+  return res.sendFile(path.join(publicDir, 'index.html'), (err) => {
+    if (err) next(err);
+  });
+});
+
 app.use((error, _req, res, _next) => {
   console.error(error);
   res.status(500).json({ error: '服务器暂时没能完成这个请求。' });
