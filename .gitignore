@@ -1,5 +1,6 @@
 node_modules/
 runtime/downloads/
+runtime/notes/
 runtime/python/
 runtime/funasr/
 runtime/funasr-models/
