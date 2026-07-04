@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Pixel · 时间戳联动高亮 · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root { --color-background-secondary: #EEEEEE; --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --border-radius-lg: 12px; }
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+.ts { color: #E0F8D0; background: #346856; padding: 1px 4px; font-weight: 500; }
+.ts-active { color: #E0F8D0; background: #C13030; padding: 1px 4px; font-weight: 500; box-shadow: 0 0 0 2px #081820; }
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #E0F8D0; overflow: hidden; border: 4px solid #081820; font-family: var(--font-mono);">
+<div style="background: #88C070; border-bottom: 4px solid #081820; padding: 7px 12px; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span>
+<span style="flex:1; text-align: center; font-size: 11px; color: #081820; letter-spacing: 3px; font-weight: 500;">▓▒░ save file ░▒▓</span>
+<span style="font-size: 10px; color: #081820;">[×]</span>
+</div>
+<div style="background: #E0F8D0; border-bottom: 3px solid #346856; padding: 10px 16px; display: flex; gap: 14px; align-items: center;">
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ archive</span>
+<span style="font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1.5px;">► file.001</span>
+<span style="flex:1;"></span>
+<span style="font-size: 11px; color: #C13030; letter-spacing: 1.5px; font-weight: 500;">◈ 08:12 selected</span>
+</div>
+
+<div style="padding: 14px 20px 8px; display: flex; align-items: flex-end; gap: 12px;">
+<div style="flex: 1;">
+<div style="font-size: 10px; color: #346856; letter-spacing: 2px; font-weight: 500;">━━ file loaded ━━</div>
+<div style="font-size: 17px; color: #081820; font-weight: 500;">深度学习入门到实践</div>
+<div style="font-size: 11px; color: #346856; letter-spacing: 1px;">bilibili · 42:18 · 沐神</div>
+</div>
+<div style="display: flex; gap: 4px;">
+<button style="background: #88C070; color: #081820; border: 2px solid #081820; padding: 6px 10px; font-size: 10px; font-family: var(--font-mono); letter-spacing: 1px; font-weight: 500;">.md</button>
+<button style="background: #FFFFFF; color: #081820; border: 2px solid #081820; padding: 6px 10px; font-size: 10px; font-family: var(--font-mono); letter-spacing: 1px; font-weight: 500;">obsidian</button>
+<button style="background: #FFFFFF; color: #081820; border: 2px solid #081820; padding: 6px 10px; font-size: 10px; font-family: var(--font-mono); letter-spacing: 1px; font-weight: 500;">copy</button>
+</div>
+</div>
+
+<div style="padding: 6px 20px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative;">
+
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 12px 14px;">
+<div style="font-size: 10px; color: #081820; letter-spacing: 2px; font-weight: 500; padding-bottom: 6px; border-bottom: 2px dashed #88C070; margin-bottom: 10px;">── learning notes ──</div>
+
+<div style="font-size: 10px; color: #346856; letter-spacing: 1px; margin-bottom: 4px; font-weight: 500;">◆ 一句话总结</div>
+<div style="font-size: 12px; color: #081820; line-height: 1.55; margin-bottom: 12px;">从张量到反向传播,把深度学习最小可用的心智模型搭起来。</div>
+
+<div style="font-size: 10px; color: #346856; letter-spacing: 1px; margin-bottom: 4px; font-weight: 500;">◆ 核心观点</div>
+<div style="font-size: 12px; color: #081820; line-height: 1.75; margin-bottom: 12px;">
+► 反向传播就是链式法则 <span class="ts">03:24</span><br>
+<span style="background: #FFF9C4; padding: 2px 3px; margin: 0 -3px; display: inline-block; border: 1px dashed #C13030;">► 优化器决定"往哪走" <span class="ts-active">08:12</span></span><br>
+► 过拟合 = 死记硬背 <span class="ts">15:47</span>
+</div>
+
+<div style="font-size: 10px; color: #346856; letter-spacing: 1px; margin-bottom: 4px; font-weight: 500;">◆ 行动建议</div>
+<div style="font-size: 12px; color: #081820; line-height: 1.55;">动手实现一次前向 + 反向,别再看一遍视频。</div>
+</div>
+
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 12px 14px;">
+<div style="font-size: 10px; color: #081820; letter-spacing: 2px; font-weight: 500; padding-bottom: 6px; border-bottom: 2px dashed #88C070; margin-bottom: 10px;">── transcript.log ──</div>
+<div style="font-size: 11px; color: #081820; line-height: 1.55;">
+<div style="margin-bottom: 8px;"><span class="ts">00:00</span> 今天我们来讲深度学习入门…</div>
+<div style="margin-bottom: 8px;"><span class="ts">03:24</span> 反向传播其实就是链式法则的堆叠,不难的…</div>
+<div style="margin: 0 -6px 8px; background: #FFF9C4; border: 3px solid #C13030; padding: 6px 8px;">
+<span class="ts-active">08:12</span> 优化器很关键,SGD 和 Adam 是最常见的两种。SGD 更稳但收敛慢,Adam 收敛快但有时候会过拟合。选哪个看你的数据规模和硬件预算…
+</div>
+<div style="margin-bottom: 8px;"><span class="ts">15:47</span> 过拟合的直观理解是死记硬背…</div>
+<div style="margin-bottom: 8px;"><span class="ts">22:11</span> 一个最小可用的训练循环…</div>
+</div>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 50%; left: 47.5%; transform: translate(-50%, -50%); pointer-events: none; overflow: visible;" width="60" height="30" viewBox="0 0 60 30">
+<line x1="0" y1="15" x2="60" y2="15" stroke="#C13030" stroke-width="2" stroke-dasharray="3 3"/>
+<path d="M55 10 L60 15 L55 20" fill="none" stroke="#C13030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5 10 L0 15 L5 20" fill="none" stroke="#C13030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+</div>
+
+<div style="padding: 0 20px 12px; text-align: center;">
+<div style="display: inline-block; background: #C13030; color: #E0F8D0; padding: 4px 12px; font-size: 10px; letter-spacing: 1.5px; font-weight: 500;">◈ 从"核心观点 [08:12]" 定位到 transcript.log 08:12 · 500ms 高亮</div>
+</div>
+
+<div style="background: #88C070; border-top: 4px solid #081820; padding: 10px 16px; display: flex; align-items: center; gap: 14px; font-size: 11px; color: #081820; font-weight: 500;">
+<span style="letter-spacing: 1.5px;">▓▓▓▓▓ complete!</span>
+<span style="flex:1;"></span>
+<span>[A] 编辑</span><span>[B] 返回</span><span>[Y] 分享</span>
+</div>
+
+</div>
+</div>
+</div>
+<div class="mockup-caption">v1.0 · <code>RS-04</code> · Pixel · 结果页 · 时间戳点击 · 双栏联动高亮 · <code>pixel-result-timestamp-active.html</code></div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Pixel · 工具箱 · 文件上传后 · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root { --color-background-secondary: #EEEEEE; --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --border-radius-lg: 12px; }
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+.tool-card { background: #FFFFFF; border: 3px solid #081820; padding: 14px 16px 12px; margin-bottom: 12px; }
+.tool-card.dim { opacity: 0.5; }
+.tool-card.active { border-color: #C13030; box-shadow: 0 0 0 3px #FFF9C4; }
+.tool-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px dashed #88C070; }
+.tool-icon { width: 36px; height: 36px; background: #E0F8D0; border: 2px solid #081820; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.tool-title { font-size: 14px; color: #081820; font-weight: 500; letter-spacing: 0.5px; margin-bottom: 2px; }
+.tool-desc { font-size: 10px; color: #346856; letter-spacing: 0.5px; line-height: 1.5; }
+.row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 11px; }
+.row .lbl { min-width: 80px; color: #346856; font-weight: 500; letter-spacing: 0.5px; }
+.input { background: #FFFFFF; border: 2px solid #081820; padding: 6px 10px; font-family: var(--font-mono); font-size: 11px; color: #081820; flex: 1; }
+.radio { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: #081820; }
+.radio .dot { display: inline-block; width: 9px; height: 9px; border: 2px solid #081820; }
+.radio.on .dot { background: #081820; }
+.radio.on { font-weight: 500; }
+.radio.locked { opacity: 0.4; }
+.check { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; color: #081820; letter-spacing: 0.5px; }
+.check .box { display: inline-block; width: 10px; height: 10px; border: 2px solid #081820; background: #FFFFFF; text-align: center; line-height: 8px; font-size: 8px; color: #081820; font-weight: 700; }
+.check.on .box { background: #081820; color: #E0F8D0; }
+.btn-go { background: #081820; color: #E0F8D0; border: 2px solid #081820; padding: 8px 18px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2.5px; font-weight: 500; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #E0F8D0; overflow: hidden; border: 4px solid #081820; font-family: var(--font-mono);">
+<div style="background: #88C070; border-bottom: 4px solid #081820; padding: 7px 12px; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span>
+<span style="flex:1; text-align: center; font-size: 11px; color: #081820; letter-spacing: 3px; font-weight: 500;">▓▒░ tools · file loaded ░▒▓</span>
+<span style="font-size: 10px; color: #081820;">[×]</span>
+</div>
+<div style="background: #E0F8D0; border-bottom: 3px solid #346856; padding: 10px 16px; display: flex; gap: 14px; align-items: center;">
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ start</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ archive</span>
+<span style="font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1.5px;">► tools</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ config</span>
+<span style="flex:1;"></span>
+<span style="font-size: 10px; color: #081820; font-weight: 500; letter-spacing: 1px;">tool 2 · ready</span>
+</div>
+
+<div style="padding: 16px 20px 10px;">
+<div style="font-size: 10px; color: #081820; letter-spacing: 2.5px; margin-bottom: 4px; font-weight: 500;">━━ toolbox · 单独功能 ━━</div>
+<div style="font-size: 11px; color: #346856; letter-spacing: 0.5px; margin-bottom: 14px;">Tool 2 已就绪 · 其他工具收起 · 转录只会用当前配置</div>
+
+<div class="tool-card dim">
+<div class="tool-head">
+<div class="tool-icon"><i class="ti ti-download" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="tool-title">Tool 1 · 单独下载媒体</div>
+<div class="tool-desc" style="color: #B4B2A9;">收起 · 点击展开</div>
+</div>
+<span style="font-size: 16px; color: #B4B2A9;">▼</span>
+</div>
+</div>
+
+<div class="tool-card active">
+<div class="tool-head">
+<div class="tool-icon" style="background: #FFF9C4; border-color: #C13030;"><i class="ti ti-microphone" style="font-size: 20px; color: #C13030;"></i></div>
+<div style="flex: 1;">
+<div class="tool-title" style="color: #C13030;">Tool 2 · 本地音视频转文字 <span style="font-size: 9px; background: #C13030; color: #FFFFFF; padding: 2px 6px; margin-left: 4px; letter-spacing: 1px;">READY</span></div>
+<div class="tool-desc">拖入本地文件 · 走本地 FunASR · 只输出转录文本 · 音频不出本机</div>
+</div>
+<span style="font-size: 10px; color: #346856; letter-spacing: 1.5px; align-self: flex-end;">via funasr</span>
+</div>
+
+<div style="background: #E0F8D0; border: 3px solid #081820; padding: 10px 12px; display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+<div style="width: 48px; height: 48px; background: #081820; border: 2px solid #081820; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+<i class="ti ti-video" style="font-size: 24px; color: #88C070;"></i>
+</div>
+<div style="flex: 1;">
+<div style="font-size: 12px; color: #081820; font-weight: 500; letter-spacing: 0.3px; margin-bottom: 3px;">深度学习入门 · 沐神.mp4</div>
+<div style="font-size: 10px; color: #346856; letter-spacing: 0.5px;">128 MB · 42:18 · h264 · 中文 · 已解析元信息</div>
+</div>
+<button style="background: transparent; color: #C13030; border: 2px solid #C13030; padding: 4px 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; font-weight: 500; cursor: pointer;">× remove</button>
+</div>
+
+<div class="row"><span class="lbl">Provider</span>
+<span class="radio on"><span class="dot"></span>FunASR · 本地(默认)</span>
+<span class="radio locked"><span class="dot"></span>讯飞 · 需 Key</span>
+<span class="radio locked"><span class="dot"></span>腾讯 · 需 Key</span>
+</div>
+<div class="row"><span class="lbl">语言</span>
+<select class="input" style="max-width: 160px;">
+<option>中文(优先)</option>
+<option>中英混合</option>
+</select>
+<span class="check on" style="margin-left: 8px;"><span class="box">✓</span>热词表</span>
+<span class="check" style="margin-left: 4px;"><span class="box"></span>说话人分离</span>
+</div>
+<div class="row"><span class="lbl">输出</span>
+<span class="check on"><span class="box">✓</span>SRT</span>
+<span class="check on"><span class="box">✓</span>TXT</span>
+<span class="check"><span class="box"></span>VTT</span>
+<span class="check"><span class="box"></span>JSON</span>
+</div>
+
+<div style="background: #FFF9C4; border: 2px dashed #081820; padding: 8px 12px; margin: 8px 0; font-size: 11px; color: #081820; letter-spacing: 0.3px;">
+<div style="font-weight: 500; margin-bottom: 3px; letter-spacing: 1px;">◈ 预计:</div>
+<div style="line-height: 1.55;">
+处理时间 <strong>≈ 3-5 分钟</strong>(42 分钟音频 · FunASR RTF≈0.08 · CPU 单核)<br>
+存储占用 <strong>≈ 240 KB</strong>(SRT + TXT 输出)· 音频不落盘,处理完自动清理
+</div>
+</div>
+
+<div class="row" style="border-top: 1px dashed #88C070; padding-top: 10px; margin-top: 4px;">
+<span class="lbl">存到</span>
+<span style="font-size: 10px; color: #081820; flex: 1; letter-spacing: 0.3px;"><code style="background: #E0F8D0; padding: 1px 4px;">~/Downloads/downspace/asr/</code></span>
+<button class="btn-go">▶ transcribe now</button>
+</div>
+</div>
+
+<div class="tool-card dim">
+<div class="tool-head">
+<div class="tool-icon"><i class="ti ti-refresh" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="tool-title">Tool 3 · 字幕格式转换</div>
+<div class="tool-desc" style="color: #B4B2A9;">收起 · 点击展开</div>
+</div>
+<span style="font-size: 16px; color: #B4B2A9;">▼</span>
+</div>
+</div>
+
+</div>
+
+<div style="background: #88C070; border-top: 4px solid #081820; padding: 7px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #081820; letter-spacing: 2px; font-weight: 500;">
+<span>▲▼ tools</span><span>[A] transcribe</span><span>[B] back</span><span>storage ▓▓░░░░ 24%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mockup-caption">v1.2 · <code>TL-02</code> · Pixel · 工具箱 · Tool 2 文件上传后 · 其他工具折叠 · 文件预览 + 处理预计 + remove 按钮 · <code>pixel-tools-uploaded.html</code></div>
+</body>
+</html>

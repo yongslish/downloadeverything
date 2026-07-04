@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Pixel · 设置页 · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root { --color-background-secondary: #EEEEEE; --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --border-radius-lg: 12px; }
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+.divider { font-size: 10px; color: #081820; letter-spacing: 2.5px; margin: 18px 0 10px; font-weight: 500; }
+.divider:first-child { margin-top: 0; }
+.row { display: flex; align-items: center; gap: 12px; padding: 4px 0; font-size: 12px; color: #081820; }
+.row .lbl { min-width: 90px; color: #346856; letter-spacing: 0.5px; font-weight: 500; }
+.radio { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.radio .dot { display: inline-block; width: 10px; height: 10px; border: 2px solid #081820; }
+.radio.on .dot { background: #081820; }
+.radio.on { font-weight: 500; }
+.input {
+  background: #FFFFFF; border: 2px solid #081820; padding: 6px 10px;
+  font-family: var(--font-mono); font-size: 12px; color: #081820;
+  flex: 1;
+}
+.input.disabled { color: #88C070; background: #E0F8D0; }
+.swatch { display: inline-block; width: 12px; height: 12px; border: 2px solid #081820; margin-right: 6px; vertical-align: middle; }
+.btn-danger {
+  background: transparent; color: #C13030; border: 2px solid #C13030;
+  padding: 6px 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; font-weight: 500; cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #E0F8D0; overflow: hidden; border: 4px solid #081820; font-family: var(--font-mono);">
+
+<div style="background: #88C070; border-bottom: 4px solid #081820; padding: 7px 12px; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span>
+<span style="flex:1; text-align: center; font-size: 11px; color: #081820; letter-spacing: 3px; font-weight: 500;">▓▒░ config ░▒▓</span>
+<span style="font-size: 10px; color: #081820;">[×]</span>
+</div>
+<div style="background: #E0F8D0; border-bottom: 3px solid #346856; padding: 10px 16px; display: flex; gap: 14px; align-items: center;">
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ start</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ archive</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ tools</span>
+<span style="font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1.5px;">► config</span>
+<span style="flex:1;"></span>
+<span style="font-size: 10px; color: #346856;">v0.1a</span>
+</div>
+
+<div style="padding: 18px 22px 20px;">
+
+<div class="divider">── skin ─────────────────────────────</div>
+<div class="row"><span class="lbl">主骨架</span>
+<span class="radio on"><span class="dot"></span>Pixel 系列</span>
+<span class="radio"><span class="dot"></span>Newspaper</span>
+</div>
+<div class="row"><span class="lbl">Pixel 皮肤</span>
+<span class="radio on"><span class="dot"></span><span class="swatch" style="background:#E0F8D0"></span>Pixel Retro</span>
+<span class="radio"><span class="dot"></span><span class="swatch" style="background:#FFF6E9"></span>Kawaii</span>
+<span class="radio"><span class="dot"></span><span class="swatch" style="background:#FFF0F7"></span>Y2K</span>
+</div>
+
+<div class="divider">── downbot ──────────────────────────</div>
+<div class="row"><span class="lbl">名字</span>
+<input class="input" style="max-width: 200px;" value="DownBot" />
+<span style="font-size: 10px; color: #88C070;">她会用这个名字自称</span>
+</div>
+<div class="row"><span class="lbl">Hover 弹语</span>
+<span class="radio on"><span class="dot"></span>开</span>
+<span class="radio"><span class="dot"></span>关</span>
+</div>
+
+<div class="divider">── ASR provider ─────────────────────</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-left: 4px;">
+<div class="row" style="padding: 3px 0;">
+<span class="radio on" style="min-width: 100%;"><span class="dot"></span>
+<span>原生字幕优先 + 本地 FunASR 兜底</span>
+<span style="font-size: 10px; color: #88C070; margin-left: 10px;">默认 · 零成本 · 音频不出本机</span>
+</span>
+</div>
+<div class="row" style="padding: 3px 0;">
+<span class="radio" style="min-width: 100%;"><span class="dot"></span>
+<span>讯飞大模型 API</span>
+<span style="font-size: 10px; color: #88C070; margin-left: 10px;">按分钟计费 · 需 Key</span>
+</span>
+</div>
+<div class="row" style="padding: 3px 0;">
+<span class="radio" style="min-width: 100%;"><span class="dot"></span>
+<span>腾讯云 ASR</span>
+<span style="font-size: 10px; color: #88C070; margin-left: 10px;">按分钟计费 · 需 Key</span>
+</span>
+</div>
+<div class="row" style="padding: 3px 0;">
+<span class="radio" style="min-width: 100%;"><span class="dot"></span>
+<span>OpenAI Transcribe</span>
+<span style="font-size: 10px; color: #88C070; margin-left: 10px;">按 Token · 需 Key · 25MB 上限</span>
+</span>
+</div>
+</div>
+<div class="row" style="margin-top: 8px;">
+<span class="lbl">Xunfei Key</span>
+<input class="input disabled" style="max-width: 260px;" value="app_id · api_key · api_secret" />
+<span style="font-size: 10px; color: #88C070;">选中讯飞后展开</span>
+</div>
+
+<div class="divider">── LLM ──────────────────────────────</div>
+<div class="row"><span class="lbl">Provider</span>
+<span class="radio on"><span class="dot"></span>Anthropic</span>
+<span class="radio"><span class="dot"></span>OpenAI</span>
+<span class="radio"><span class="dot"></span>Local</span>
+</div>
+<div class="row"><span class="lbl">Model</span>
+<select class="input" style="max-width: 260px;">
+<option>claude-opus-4-7 (最强,慢)</option>
+<option>claude-sonnet-4-6 (推荐)</option>
+<option>claude-haiku-4-5 (快,便宜)</option>
+</select>
+</div>
+<div class="row"><span class="lbl">API Key</span>
+<input class="input" type="password" style="max-width: 260px;" value="sk-ant-••••••••" />
+<span style="font-size: 10px; color: #88C070;">本地存储 · 不上传</span>
+</div>
+
+<div class="divider">── prompt template ──────────────────</div>
+<div class="row" style="align-items: flex-start;">
+<span class="lbl" style="padding-top: 8px;">当前模板</span>
+<div style="flex: 1;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+<select class="input" style="max-width: 220px;">
+<option>▸ 默认 · 学习笔记 v1</option>
+<option>▸ 访谈复盘</option>
+<option>▸ + 新建自定义…</option>
+</select>
+<span style="font-size: 10px; color: #88C070;">hash: 7f2a1c</span>
+</div>
+<textarea class="input" style="width: 100%; min-height: 60px; font-size: 11px; line-height: 1.55; resize: vertical;">你是一名帮我把视频/图文整理成学习笔记的助理。请输出:一句话总结 · 核心观点(每条附时间戳)· 内容结构 · 行动建议 · 值得追问的问题…</textarea>
+</div>
+</div>
+
+<div class="divider">── export ───────────────────────────</div>
+<div class="row"><span class="lbl">Obsidian vault</span>
+<input class="input" style="max-width: 320px;" value="/Users/me/Documents/Obsidian/downspace" />
+<button style="background: transparent; border: 2px solid #081820; padding: 4px 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; cursor: pointer;">choose…</button>
+</div>
+<div class="row"><span class="lbl">Notion</span>
+<span style="font-size: 11px; color: #88C070; letter-spacing: 1px;">v2 上线 · 目前占位</span>
+</div>
+
+<div class="divider">── data ─────────────────────────────</div>
+<div class="row"><span class="lbl">存储</span>
+<span style="font-size: 11px; color: #081820;">12 saves · 音频缓存 240 MB · 模型 900 MB</span>
+</div>
+<div class="row" style="gap: 8px;">
+<button style="background: transparent; color: #081820; border: 2px solid #081820; padding: 6px 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; font-weight: 500; cursor: pointer;">↓ 导出全部笔记 .zip</button>
+<button class="btn-danger">✕ 清空音频缓存</button>
+<button class="btn-danger">⚠ 清空全部数据</button>
+</div>
+<div class="row"><span class="lbl">关于</span>
+<span style="font-size: 11px; color: #346856;">Downspace v0.1a · <a href="../design-system.md" style="color: #081820;">design system</a> · <a href="../product-requirements.md" style="color: #081820;">PRD</a></span>
+</div>
+
+</div>
+
+<div style="background: #88C070; border-top: 4px solid #081820; padding: 7px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #081820; letter-spacing: 2px; font-weight: 500;">
+<span>▲▼ scroll</span><span>[A] save changes</span><span>[B] back</span><span>storage ▓▓░░░░ 24%</span>
+</div>
+
+</div>
+</div>
+</div>
+<div class="mockup-caption">v1.0 · <code>CF-01</code> · Pixel · 设置页(7 分区默认视图)· <code>pixel-config.html</code></div>
+</body>
+</html>

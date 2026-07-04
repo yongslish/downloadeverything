@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Pixel · Stage 1 早期态 · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root { --color-background-secondary: #EEEEEE; --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --border-radius-lg: 12px; }
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #E0F8D0; overflow: hidden; border: 4px solid #081820; font-family: var(--font-mono);">
+<div style="background: #88C070; border-bottom: 4px solid #081820; padding: 7px 12px; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span>
+<span style="flex:1; text-align: center; font-size: 11px; color: #081820; letter-spacing: 3px; font-weight: 500;">▓▒░ processing... ░▒▓</span>
+<span style="font-size: 10px; color: #081820;">[×]</span>
+</div>
+<div style="background: #E0F8D0; border-bottom: 3px solid #346856; padding: 10px 16px; display: flex; gap: 14px; align-items: center;">
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ start</span>
+<span style="font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1.5px;">► loading</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ archive</span>
+<span style="flex:1;"></span>
+<span style="font-size: 10px; color: #346856; letter-spacing: 1px;">stage 1 / 6 · just started</span>
+</div>
+
+<div style="padding: 14px 20px 8px;">
+<div style="font-size: 10px; color: #346856; letter-spacing: 2px; margin-bottom: 4px; font-weight: 500;">▲ now loading ▲</div>
+<div style="font-size: 16px; color: #081820; font-weight: 500;">正在识别链接…</div>
+<div style="font-size: 11px; color: #346856; letter-spacing: 1px;">https://www.bilibili.com/video/BV1XY4y1D7Ab</div>
+</div>
+
+<div style="padding: 4px 20px 12px;">
+<div style="background: #88C070; border: 3px solid #081820; padding: 6px;">
+<svg viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; height: auto; shape-rendering: crispEdges;">
+<rect width="520" height="150" fill="#88C070"/>
+<rect x="20" y="70" width="24" height="60" fill="#346856"/><rect x="48" y="50" width="20" height="80" fill="#081820"/>
+<rect x="72" y="80" width="28" height="50" fill="#346856"/><rect x="104" y="40" width="24" height="90" fill="#081820"/>
+<rect x="360" y="60" width="26" height="70" fill="#081820"/><rect x="390" y="45" width="20" height="85" fill="#346856"/>
+<rect x="414" y="75" width="24" height="55" fill="#081820"/><rect x="442" y="55" width="20" height="75" fill="#346856"/>
+<rect x="466" y="65" width="24" height="65" fill="#081820"/><rect x="494" y="50" width="20" height="80" fill="#346856"/>
+<g fill="#E0F8D0">
+<rect x="26" y="80" width="3" height="3"/><rect x="35" y="80" width="3" height="3"/>
+<rect x="52" y="58" width="3" height="3"/><rect x="60" y="58" width="3" height="3"/>
+<rect x="108" y="50" width="3" height="3"/><rect x="118" y="50" width="3" height="3"/>
+<rect x="364" y="70" width="3" height="3"/><rect x="374" y="70" width="3" height="3"/>
+<rect x="446" y="65" width="3" height="3"/><rect x="454" y="65" width="3" height="3"/>
+</g>
+<rect x="0" y="130" width="520" height="20" fill="#346856"/><rect x="0" y="130" width="520" height="3" fill="#081820"/>
+<g fill="#E0F8D0">
+<rect x="20" y="140" width="8" height="3"/><rect x="60" y="140" width="8" height="3"/>
+<rect x="100" y="140" width="8" height="3"/><rect x="140" y="140" width="8" height="3"/>
+<rect x="360" y="140" width="8" height="3"/><rect x="400" y="140" width="8" height="3"/>
+<rect x="440" y="140" width="8" height="3"/><rect x="480" y="140" width="8" height="3"/>
+</g>
+
+<rect x="120" y="12" width="200" height="24" fill="#E0F8D0" stroke="#081820" stroke-width="2"/>
+<path d="M112 30 L124 26 L124 34 Z" fill="#E0F8D0" stroke="#081820" stroke-width="2" stroke-linejoin="miter"/>
+<text x="220" y="28" text-anchor="middle" font-family="ui-monospace, monospace" font-size="12" font-weight="500" fill="#081820">正在识别是哪家的链接…</text>
+
+<g transform="translate(140, 45)">
+<rect x="6" y="0" width="8" height="4" fill="#346856"/><rect x="26" y="0" width="8" height="4" fill="#346856"/>
+<rect x="8" y="2" width="4" height="4" fill="#88C070"/><rect x="28" y="2" width="4" height="4" fill="#88C070"/>
+<rect x="8" y="6" width="4" height="6" fill="#081820"/><rect x="28" y="6" width="4" height="6" fill="#081820"/>
+<rect x="0" y="12" width="40" height="4" fill="#081820"/><rect x="0" y="16" width="4" height="26" fill="#081820"/>
+<rect x="36" y="16" width="4" height="26" fill="#081820"/><rect x="0" y="38" width="40" height="4" fill="#081820"/>
+<rect x="4" y="16" width="32" height="22" fill="#E0F8D0"/><rect x="4" y="16" width="32" height="5" fill="#346856"/>
+<rect x="10" y="24" width="4" height="4" fill="#081820"/><rect x="26" y="24" width="4" height="4" fill="#081820"/>
+<rect x="14" y="25" width="2" height="2" fill="#E0F8D0"/><rect x="30" y="25" width="2" height="2" fill="#E0F8D0"/>
+<rect x="17" y="32" width="6" height="2" fill="#081820"/>
+<rect x="6" y="46" width="28" height="4" fill="#081820"/><rect x="6" y="46" width="4" height="20" fill="#081820"/>
+<rect x="30" y="46" width="4" height="20" fill="#081820"/><rect x="6" y="62" width="28" height="4" fill="#081820"/>
+<rect x="10" y="50" width="20" height="12" fill="#E0F8D0"/>
+<rect x="18" y="52" width="4" height="4" fill="#346856"/><rect x="14" y="54" width="12" height="4" fill="#346856"/>
+<rect x="16" y="58" width="8" height="2" fill="#346856"/>
+<rect x="-8" y="48" width="12" height="4" fill="#346856"/>
+<rect x="-8" y="48" width="12" height="2" fill="#081820"/>
+<rect x="-16" y="52" width="20" height="14" fill="#FFF9C4" stroke="#081820" stroke-width="1"/>
+<text x="-6" y="62" font-family="ui-monospace, monospace" font-size="7" fill="#081820">URL</text>
+<rect x="4" y="66" width="32" height="4" fill="#346856"/><rect x="0" y="70" width="40" height="4" fill="#346856"/>
+<rect x="0" y="66" width="4" height="4" fill="#081820"/><rect x="36" y="66" width="4" height="4" fill="#081820"/>
+<rect x="6" y="74" width="6" height="12" fill="#081820"/><rect x="18" y="74" width="6" height="10" fill="#081820"/>
+<rect x="2" y="86" width="14" height="6" fill="#081820"/><rect x="15" y="84" width="14" height="6" fill="#081820"/>
+</g>
+<rect x="180" y="130" width="4" height="4" fill="#081820" opacity="0.7"/>
+<rect x="200" y="132" width="4" height="4" fill="#081820" opacity="0.5"/>
+<rect x="220" y="134" width="4" height="4" fill="#081820" opacity="0.3"/>
+</svg>
+</div>
+</div>
+
+<div style="padding: 4px 20px 12px;">
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 12px 14px;">
+<div style="font-size: 10px; color: #081820; font-weight: 500; letter-spacing: 2px; margin-bottom: 10px;">── stage progress ────────────────────────────</div>
+<div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; color: #081820;">
+<div style="display: flex; justify-content: space-between; background: #E0F8D0; padding: 4px 6px; margin: -4px -6px; font-weight: 500;"><span>[►] 抓取视频<span style="font-weight: 400; margin-left: 8px; font-size: 10px; color: #346856;">— 平台识别中</span></span><span style="letter-spacing: 1.5px;">▓░░░░ 18%</span></div>
+<div style="display: flex; justify-content: space-between; color: #88C070;"><span>[ ] 找到原生字幕</span><span style="letter-spacing: 1.5px;">░░░░░ wait</span></div>
+<div style="display: flex; justify-content: space-between; color: #88C070;"><span>[ ] 取标题和简介</span><span style="letter-spacing: 1.5px;">░░░░░ wait</span></div>
+<div style="display: flex; justify-content: space-between; color: #88C070;"><span>[ ] 整理完整文本</span><span style="letter-spacing: 1.5px;">░░░░░ wait</span></div>
+<div style="display: flex; justify-content: space-between; color: #88C070;"><span>[ ] 生成学习笔记</span><span style="letter-spacing: 1.5px;">░░░░░ wait</span></div>
+<div style="display: flex; justify-content: space-between; color: #88C070;"><span>[ ] 准备导出</span><span style="letter-spacing: 1.5px;">░░░░░ wait</span></div>
+</div>
+</div>
+</div>
+
+<div style="background: #88C070; border-top: 4px solid #081820; padding: 10px 16px; display: flex; align-items: center; gap: 14px; font-size: 11px; color: #081820; font-weight: 500;">
+<span style="letter-spacing: 1.5px;">HP</span>
+<span style="letter-spacing: 1px; font-size: 12px;">▓░░░░░░░░░░░░░</span>
+<span style="letter-spacing: 1px;">stage 1/6</span>
+<span style="flex:1;"></span>
+<span style="letter-spacing: 1.5px;">just started</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mockup-caption">v1.2 · <code>PR-04</code> · Pixel · Stage 1 · 刚启动 · DownBot 抱 URL 便利贴跑 · 平台识别中 · <code>pixel-processing-early.html</code></div>
+</body>
+</html>

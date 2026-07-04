@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Newspaper · 处理中 · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root {
+  --color-background-secondary: #EEEEEE;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-serif: 'Source Serif 4', 'Source Serif Pro', 'PingFang SC', 'Songti SC', Georgia, serif;
+  --border-radius-lg: 12px;
+}
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #F0E6D2; overflow: hidden; border: 1px solid #2A2418;">
+<div style="padding: 10px 20px 6px; border-bottom: 3px double #2A2418; display: flex; justify-content: space-between; align-items: flex-end;">
+<div>
+<div style="font-family: var(--font-mono); font-size: 8px; color: #8B2A1E; letter-spacing: 3px;">EST · MMXXVI</div>
+<div style="font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: #2A2418; letter-spacing: 1.5px; line-height: 1;">The Downspace Herald</div>
+</div>
+<div style="text-align: right;">
+<div style="font-family: var(--font-mono); font-size: 9px; color: #2A2418; letter-spacing: 2px;">SPECIAL EDITION</div>
+<div style="font-family: var(--font-serif); font-size: 11px; color: #8B2A1E; font-style: italic;">Going to Press</div>
+</div>
+</div>
+<div style="display: flex; padding: 5px 20px; border-bottom: 1px solid #2A2418; font-family: var(--font-mono); font-size: 10px; color: #2A2418; letter-spacing: 1.5px;">
+<span>VOL. I · NO. 42</span>
+<span style="flex:1; text-align: center;">— IN PROGRESS —</span>
+<span style="color: #8B2A1E;">DEADLINE 15S</span>
+</div>
+<div style="padding: 18px 22px 12px;">
+<div style="font-family: var(--font-mono); font-size: 9px; color: #8B2A1E; letter-spacing: 3px; margin-bottom: 6px;">━━ IN PROGRESS ━━</div>
+<div style="font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: #2A2418; line-height: 1.2; margin-bottom: 4px;">深度学习入门到实践</div>
+<div style="font-family: var(--font-serif); font-size: 11px; color: #5A4834; font-style: italic; margin-bottom: 18px;">— 来自哔哩哔哩 · 42:18 · 沐神主讲 —</div>
+<div style="display: grid; grid-template-columns: 1fr 200px; gap: 22px;">
+<div>
+<div style="font-family: var(--font-mono); font-size: 9px; color: #8B2A1E; letter-spacing: 2px; margin-bottom: 8px;">— NEWSROOM STATUS —</div>
+<div style="font-family: var(--font-serif); font-size: 13px; color: #2A2418; line-height: 1.85;">
+<div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed #C0B499;">
+<span>✓ 记者到岗<span style="font-style: italic; color: #5A4834; margin-left: 8px;">— url 已抓取</span></span>
+<span style="font-family: var(--font-mono); font-size: 10px; color: #5A4834;">DONE</span>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed #C0B499;">
+<span>✓ 素材归档<span style="font-style: italic; color: #5A4834; margin-left: 8px;">— 标题与简介</span></span>
+<span style="font-family: var(--font-mono); font-size: 10px; color: #5A4834;">DONE</span>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed #C0B499;">
+<span>✓ 速记稿收齐<span style="font-style: italic; color: #5A4834; margin-left: 8px;">— 找到原生字幕</span></span>
+<span style="font-family: var(--font-mono); font-size: 10px; color: #5A4834;">DONE</span>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 5px 6px; margin: 0 -6px; background: #E5D9BE; border-bottom: 1px dashed #8B2A1E; border-top: 1px dashed #8B2A1E; font-weight: 500;">
+<span style="color: #8B2A1E;">▶ 校对整理中<span style="font-style: italic; margin-left: 8px;">— 整理全文</span></span>
+<span style="font-family: var(--font-mono); font-size: 10px; color: #8B2A1E;">42%</span>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed #C0B499; color: #8A7B6A;">
+<span>○ 主编审稿<span style="font-style: italic; margin-left: 8px;">— 生成学习笔记</span></span>
+<span style="font-family: var(--font-mono); font-size: 10px;">HOLD</span>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 4px 0; color: #8A7B6A;">
+<span>○ 送印刷厂<span style="font-style: italic; margin-left: 8px;">— 准备导出</span></span>
+<span style="font-family: var(--font-mono); font-size: 10px;">HOLD</span>
+</div>
+</div>
+</div>
+<div>
+<svg viewBox="0 0 190 220" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; height: auto;">
+<rect x="5" y="150" width="180" height="60" fill="#E5D9BE" stroke="#2A2418" stroke-width="1"/>
+<line x1="5" y1="150" x2="185" y2="150" stroke="#2A2418" stroke-width="1"/>
+<rect x="35" y="118" width="120" height="42" fill="#2A2418" stroke="#2A2418" stroke-width="1"/>
+<rect x="40" y="123" width="110" height="8" fill="#5A4834"/>
+<g fill="#F0E6D2">
+<rect x="45" y="135" width="6" height="6"/><rect x="55" y="135" width="6" height="6"/><rect x="65" y="135" width="6" height="6"/>
+<rect x="75" y="135" width="6" height="6"/><rect x="85" y="135" width="6" height="6"/><rect x="95" y="135" width="6" height="6"/>
+<rect x="105" y="135" width="6" height="6"/><rect x="115" y="135" width="6" height="6"/><rect x="125" y="135" width="6" height="6"/>
+<rect x="135" y="135" width="6" height="6"/>
+<rect x="50" y="145" width="6" height="6"/><rect x="60" y="145" width="6" height="6"/><rect x="70" y="145" width="6" height="6"/>
+<rect x="80" y="145" width="6" height="6"/><rect x="90" y="145" width="6" height="6"/><rect x="100" y="145" width="6" height="6"/>
+<rect x="110" y="145" width="6" height="6"/><rect x="120" y="145" width="6" height="6"/><rect x="130" y="145" width="6" height="6"/>
+</g>
+<rect x="70" y="90" width="50" height="30" fill="#FFFFFF" stroke="#2A2418" stroke-width="0.8"/>
+<line x1="76" y1="98" x2="114" y2="98" stroke="#2A2418" stroke-width="0.4"/>
+<line x1="76" y1="104" x2="110" y2="104" stroke="#2A2418" stroke-width="0.4"/>
+<line x1="76" y1="110" x2="114" y2="110" stroke="#2A2418" stroke-width="0.4"/>
+<g transform="translate(95, -12)">
+<path d="M-12 60 L-15 42" stroke="#2A2418" stroke-width="1" stroke-linecap="round" fill="none"/>
+<path d="M12 60 L15 42" stroke="#2A2418" stroke-width="1" stroke-linecap="round" fill="none"/>
+<circle cx="-15" cy="40" r="3" fill="#F0E6D2" stroke="#2A2418" stroke-width="1"/>
+<circle cx="15" cy="40" r="3" fill="#F0E6D2" stroke="#2A2418" stroke-width="1"/>
+<circle cx="-15" cy="40" r="1.2" fill="#8B2A1E"/>
+<circle cx="15" cy="40" r="1.2" fill="#8B2A1E"/>
+<rect x="-24" y="60" width="48" height="48" rx="12" fill="#FFFFFF" stroke="#2A2418" stroke-width="1"/>
+<path d="M-24 74 Q-32 78 -30 100 Q-27 103 -24 100 Z" fill="#F0E6D2" stroke="#2A2418" stroke-width="0.8"/>
+<path d="M24 74 Q32 78 30 100 Q27 103 24 100 Z" fill="#F0E6D2" stroke="#2A2418" stroke-width="0.8"/>
+<path d="M-24 72 Q-20 62 -8 63 Q0 60 8 63 Q20 62 24 72 L22 76 Q16 71 8 72 Q0 68 -8 72 Q-16 71 -22 76 Z" fill="#F0E6D2" stroke="#2A2418" stroke-width="0.8"/>
+<line x1="-27" y1="80" x2="-27" y2="98" stroke="#2A2418" stroke-width="0.3" opacity="0.5"/>
+<line x1="27" y1="80" x2="27" y2="98" stroke="#2A2418" stroke-width="0.3" opacity="0.5"/>
+<rect x="-17" y="78" width="34" height="20" rx="2" fill="#F0E6D2" stroke="#2A2418" stroke-width="0.6"/>
+<circle cx="-8" cy="87" r="4.5" fill="none" stroke="#2A2418" stroke-width="1"/>
+<circle cx="8" cy="87" r="4.5" fill="none" stroke="#2A2418" stroke-width="1"/>
+<line x1="-3.5" y1="87" x2="3.5" y2="87" stroke="#2A2418" stroke-width="1"/>
+<circle cx="-8" cy="87" r="1.8" fill="#2A2418"/>
+<circle cx="8" cy="87" r="1.8" fill="#2A2418"/>
+<circle cx="-7" cy="86" r="0.6" fill="#FFFFFF"/>
+<circle cx="9" cy="86" r="0.6" fill="#FFFFFF"/>
+<path d="M-2 96 L2 96" stroke="#2A2418" stroke-width="1" stroke-linecap="round"/>
+<rect x="-15" y="110" width="30" height="18" rx="4" fill="#FFFFFF" stroke="#2A2418" stroke-width="1"/>
+<path d="M0 118 Q-2 116 -4 117 Q-5 119 0 122 Q5 119 4 117 Q2 116 0 118 Z" fill="#8B2A1E"/>
+</g>
+<ellipse cx="20" cy="180" rx="10" ry="4" fill="#2A2418"/>
+<rect x="12" y="170" width="16" height="12" fill="#2A2418"/>
+<line x1="22" y1="170" x2="35" y2="145" stroke="#2A2418" stroke-width="1.2"/>
+<path d="M34 145 L37 140 L38 143 L36 146 Z" fill="#2A2418"/>
+<rect x="160" y="176" width="18" height="14" fill="#FFFFFF" stroke="#2A2418" stroke-width="0.8"/>
+<ellipse cx="169" cy="176" rx="9" ry="3" fill="#5A4834" stroke="#2A2418" stroke-width="0.8"/>
+<path d="M165 172 Q167 168 165 165" stroke="#8A7B6A" stroke-width="0.6" fill="none"/>
+<path d="M172 172 Q170 168 172 165" stroke="#8A7B6A" stroke-width="0.6" fill="none"/>
+</svg>
+<div style="font-family: var(--font-serif); font-size: 10px; color: #5A4834; font-style: italic; text-align: center; padding-top: 4px; border-top: 1px dashed #8A7B6A;">— 主编 DownBot 于案上 —</div>
+</div>
+</div>
+</div>
+<div style="padding: 10px 20px; background: #E5D9BE; border-top: 3px double #2A2418; display: flex; align-items: center; gap: 14px; font-family: var(--font-mono); font-size: 10px; color: #2A2418; letter-spacing: 1.5px;">
+<span style="font-weight: 500; color: #8B2A1E;">DEADLINE →</span>
+<span>▓▓▓▓▓▓▓░░░░░░</span>
+<span>4 / 6 stages</span>
+<span style="flex:1;"></span>
+<span style="letter-spacing: 2px;">GOING TO PRESS IN 15S</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mockup-caption">Downspace Design v1.0 · Newspaper · 处理中 · <code>docs/mockups/newspaper-processing.html</code></div>
+</body>
+</html>

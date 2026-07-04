@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Pixel · 结果页 · 编辑模式 · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root { --color-background-secondary: #EEEEEE; --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --border-radius-lg: 12px; }
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+@keyframes blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+.cursor { display: inline-block; width: 7px; height: 14px; background: #081820; vertical-align: -2px; margin-left: 1px; animation: blink 1s steps(1) infinite; }
+.edit-field {
+  background: #FFF9C4; border: 2px solid #081820; padding: 4px 6px;
+  display: block; font-size: 12px; color: #081820; line-height: 1.5;
+  outline: none; min-height: 20px;
+}
+.ts-edit {
+  color: #E0F8D0; background: #346856; padding: 1px 4px; font-weight: 500;
+  border: 1px dashed #E0F8D0; cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #E0F8D0; overflow: hidden; border: 4px solid #081820; font-family: var(--font-mono);">
+<div style="background: #88C070; border-bottom: 4px solid #081820; padding: 7px 12px; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span>
+<span style="flex:1; text-align: center; font-size: 11px; color: #081820; letter-spacing: 3px; font-weight: 500;">▓▒░ save file · edit mode ✎ ░▒▓</span>
+<span style="font-size: 10px; color: #081820;">[×]</span>
+</div>
+<div style="background: #FFF9C4; border-bottom: 3px solid #081820; padding: 10px 16px; display: flex; gap: 14px; align-items: center;">
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ archive</span>
+<span style="font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1.5px;">✎ editing file.001</span>
+<span style="flex:1;"></span>
+<span style="font-size: 11px; color: #081820; letter-spacing: 1px; font-weight: 500;">◈ unsaved changes · 3 fields</span>
+</div>
+
+<div style="padding: 14px 20px 8px; display: flex; align-items: flex-end; gap: 12px;">
+<div style="flex: 1;">
+<div style="font-size: 10px; color: #346856; letter-spacing: 2px; font-weight: 500;">━━ editing ━━</div>
+<div style="font-size: 17px; color: #081820; font-weight: 500;">深度学习入门到实践</div>
+<div style="font-size: 11px; color: #346856; letter-spacing: 1px;">bilibili · 42:18 · 沐神 · 修改会保存到本地</div>
+</div>
+<div style="display: flex; gap: 4px;">
+<button style="background: #88C070; color: #081820; border: 2px solid #081820; padding: 6px 10px; font-size: 10px; font-family: var(--font-mono); letter-spacing: 1px; font-weight: 500;" disabled>.md</button>
+<button style="background: transparent; color: #B4B2A9; border: 2px solid #B4B2A9; padding: 6px 10px; font-size: 10px; font-family: var(--font-mono); letter-spacing: 1px;" disabled>obsidian</button>
+<button style="background: transparent; color: #B4B2A9; border: 2px solid #B4B2A9; padding: 6px 10px; font-size: 10px; font-family: var(--font-mono); letter-spacing: 1px;" disabled>copy</button>
+</div>
+</div>
+
+<div style="padding: 6px 20px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 12px 14px;">
+<div style="font-size: 10px; color: #081820; letter-spacing: 2px; font-weight: 500; padding-bottom: 6px; border-bottom: 2px dashed #88C070; margin-bottom: 10px; display: flex; align-items: center;">
+── learning notes ── <span style="flex:1;"></span><span style="color: #C13030; font-size: 9px;">◈ EDITING</span>
+</div>
+
+<div style="font-size: 10px; color: #346856; letter-spacing: 1px; margin-bottom: 4px; font-weight: 500;">◆ 一句话总结 <span style="color: #C13030; margin-left: 4px;">✎</span></div>
+<div class="edit-field" style="margin-bottom: 12px;">从张量到反向传播,把深度学习最小可用的心智模型搭起来。<span class="cursor"></span></div>
+
+<div style="font-size: 10px; color: #346856; letter-spacing: 1px; margin-bottom: 4px; font-weight: 500;">◆ 核心观点 <span style="color: #346856; margin-left: 4px;">(点时间戳可微调)</span></div>
+<div style="font-size: 12px; color: #081820; line-height: 1.8; margin-bottom: 12px;">
+► <span contenteditable="true" style="outline: 1px dashed #88C070; padding: 0 3px;">反向传播就是链式法则</span> <span class="ts-edit">03:24</span><br>
+► <span contenteditable="true" style="outline: 1px dashed #88C070; padding: 0 3px;">优化器决定"往哪走"</span> <span class="ts-edit">08:12</span><br>
+► <span contenteditable="true" style="outline: 1px dashed #88C070; padding: 0 3px;">过拟合 = 死记硬背</span> <span class="ts-edit">15:47</span>
+</div>
+
+<div style="font-size: 10px; color: #346856; letter-spacing: 1px; margin-bottom: 4px; font-weight: 500;">◆ 行动建议 <span style="color: #C13030; margin-left: 4px;">✎</span></div>
+<div class="edit-field" style="margin-bottom: 6px;">动手实现一次前向 + 反向,别再看一遍视频。 <em style="color: #C13030;">(自己加:先看 CS231n 前 3 讲)</em></div>
+
+<div style="border-top: 1px dashed #88C070; margin-top: 12px; padding-top: 8px; font-size: 10px; color: #346856; letter-spacing: 0.5px;">
+◆ 添加自定义章节:
+<button style="background: transparent; border: 2px solid #081820; padding: 3px 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; margin-left: 4px; cursor: pointer;">+ new section</button>
+</div>
+</div>
+
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 12px 14px;">
+<div style="font-size: 10px; color: #081820; letter-spacing: 2px; font-weight: 500; padding-bottom: 6px; border-bottom: 2px dashed #88C070; margin-bottom: 10px; display: flex; align-items: center;">
+── transcript.log ── <span style="flex:1;"></span><span style="color: #346856; font-size: 9px;">read-only</span>
+</div>
+<div style="font-size: 11px; color: #081820; line-height: 1.55;">
+<div style="margin-bottom: 8px;"><span style="color: #E0F8D0; background: #346856; padding: 1px 4px; font-weight: 500; letter-spacing: 0.5px;">00:00</span> 今天我们来讲深度学习入门…</div>
+<div style="margin-bottom: 8px;"><span style="color: #E0F8D0; background: #346856; padding: 1px 4px; font-weight: 500; letter-spacing: 0.5px;">03:24</span> 反向传播其实就是链式法则的堆叠…</div>
+<div style="margin-bottom: 8px;"><span style="color: #E0F8D0; background: #346856; padding: 1px 4px; font-weight: 500; letter-spacing: 0.5px;">08:12</span> 优化器很关键,SGD 和 Adam…</div>
+<div style="margin-bottom: 8px;"><span style="color: #E0F8D0; background: #346856; padding: 1px 4px; font-weight: 500; letter-spacing: 0.5px;">15:47</span> 过拟合的直观理解是死记硬背…</div>
+<div style="margin-bottom: 8px;"><span style="color: #E0F8D0; background: #346856; padding: 1px 4px; font-weight: 500; letter-spacing: 0.5px;">22:11</span> 一个最小可用的训练循环…</div>
+<div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed #88C070; font-size: 10px; color: #346856; letter-spacing: 0.5px;">速记稿不能改 · 如需勘误请在左栏添加"勘误"章节</div>
+</div>
+</div>
+
+</div>
+
+<div style="background: #FFF9C4; border-top: 4px solid #081820; padding: 10px 16px; display: flex; align-items: center; gap: 10px; font-size: 11px; color: #081820; font-weight: 500;">
+<span style="letter-spacing: 1.5px; color: #C13030;">◈ 3 fields unsaved</span>
+<span style="flex:1;"></span>
+<button style="background: #081820; color: #E0F8D0; border: 2px solid #081820; padding: 6px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; font-weight: 500; cursor: pointer;">[A] save changes</button>
+<button style="background: transparent; color: #081820; border: 2px solid #081820; padding: 6px 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; font-weight: 500; cursor: pointer;">[B] cancel</button>
+<button style="background: transparent; color: #346856; border: 2px solid #346856; padding: 6px 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; font-weight: 500; cursor: pointer;">↺ revert</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mockup-caption">v1.2 · <code>RS-05</code> · Pixel · 结果页编辑模式 · 3 fields unsaved · 时间戳可微调 · transcript 只读 · <code>pixel-result-edit.html</code></div>
+</body>
+</html>

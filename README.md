@@ -1,6 +1,6 @@
 # Download Everything
 
-一个免登录的个人 Web 下载工具原型。它提供面向手机和电脑的同一套界面，并只接受公开、非 DRM 的 YouTube、Bilibili、抖音和小红书链接。
+一个免登录的个人 Web 下载工具原型。它提供面向手机和电脑的同一套界面，并只接受公开、非 DRM 的 Bilibili 和小红书链接。
 
 ## 运行
 
@@ -86,13 +86,13 @@ XUNFEI_LFASR_SECRET_KEY=你的 SecretKey
 - 无登录、无下载历史；任务和临时文件最多保留 30 分钟。
 - 同时只运行一个下载任务，另外最多排队三个，单文件上限 750 MB。
 - 同时只运行一个转写任务，另外最多排队三个；本地 FunASR 不按次收费，讯飞真实转写需要配置密钥并消耗对应平台额度。
-- 后端仅接收四个受支持域名的 HTTPS 链接，不接受自定义下载参数。
+- 后端仅接收 Bilibili 和小红书受支持域名的 HTTPS 链接，不接受自定义下载参数。
 - 小红书解析依赖笔记在当前网络环境中可访问。裸 `explore/作品ID` 链接很容易缺少 `xsec_token` 或被平台风控；平台的风控、失效链接或访问限制会使解析失败。
 - 不支持付费、私密、DRM 保护或需要绕过登录/访问限制的内容。使用前请确认你有保存内容的权利，并遵守相应平台条款。
 
 ## 开发交接
 
-下载链路已经拆成 Provider 架构，小红书、YouTube、B站、抖音可以在统一任务队列下走不同实现。继续开发前先看 [`docs/download-provider-architecture.md`](./docs/download-provider-architecture.md)。
+下载链路已经拆成 Provider 架构，小红书、B站在统一任务队列下走不同实现。YouTube、抖音的支持已经整体移除（而非仅从界面隐藏）——接口是可插拔的，之后如果要重新支持，可以按同样的 Provider 模式重新接入。继续开发前先看 [`docs/download-provider-architecture.md`](./docs/download-provider-architecture.md)。
 
 ## 部署提示
 

@@ -4,7 +4,9 @@
 
 ## 当前目标
 
-下载功能从“server 里写一堆平台 if/else”重构为 Provider 架构。这样小红书、B站、抖音、YouTube 可以各走最适合自己的解析/下载方式，同时前端和任务队列保持统一。
+下载功能从“server 里写一堆平台 if/else”重构为 Provider 架构。这样小红书、B站可以各走最适合自己的解析/下载方式，同时前端和任务队列保持统一。
+
+> 更新（2026-07-02）：YouTube、抖音的支持已经整体移除，而不是仅从界面隐藏——当前产品方向只把 B站视频、小红书图文/视频作为学习笔记来源，这两个平台暂时不需要。因为 Provider 接口本身可插拔，之后如果要重新支持，按“新增平台的方式”一节接回来即可，不影响其余架构。
 
 用户看到的体验仍然是：
 
@@ -20,7 +22,7 @@
 server.mjs
   └─ lib/download/providers/index.mjs
       ├─ xhs-provider.mjs      小红书专用：XHS-Downloader + 本服务下载/打包
-      └─ ytdlp-provider.mjs    通用视频站：YouTube / Bilibili / 抖音
+      └─ ytdlp-provider.mjs    通用视频站，目前仅接入 Bilibili
 
 lib/download/url.mjs           统一识别链接、域名、XHS CDN 直链
 ```
@@ -31,9 +33,7 @@ lib/download/url.mjs           统一识别链接、域名、XHS CDN 直链
 | --- | --- | --- |
 | 小红书笔记/视频 | `XhsProvider` | 先调用本机 XHS-Downloader 解析详情，再由本服务下载；视频返回 MP4，图文返回 ZIP。 |
 | 小红书 CDN 直链 | `XhsProvider` | 跳过解析器，直接下载媒体文件；`http://*.xhscdn.com` 会升级为 HTTPS。 |
-| YouTube | `YtDlpProvider` | 走 yt-dlp；国内网络可能无法测试，但架构已接入。 |
 | Bilibili | `YtDlpProvider` | 走 yt-dlp。 |
-| 抖音 | `YtDlpProvider` | 走 yt-dlp；后续如果稳定性不够，可单独拆 Douyin Provider。 |
 
 ## 新增平台的方式
 

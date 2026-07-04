@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Pixel · 首页 · URL 无效 · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root { --color-background-secondary: #EEEEEE; --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --border-radius-lg: 12px; }
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+@keyframes cursorblink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+.cursor { display: inline-block; width: 8px; height: 14px; background: #081820; vertical-align: -2px; margin-left: 2px; animation: cursorblink 1s steps(1) infinite; }
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #E0F8D0; overflow: hidden; border: 4px solid #081820; font-family: var(--font-mono);">
+
+<div style="background: #88C070; border-bottom: 4px solid #081820; padding: 7px 12px; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span>
+<span style="flex:1; text-align: center; font-size: 11px; color: #081820; letter-spacing: 3px; font-weight: 500;">▓▒░ downspace ░▒▓</span>
+<span style="font-size: 10px; color: #081820;">[×]</span>
+</div>
+
+<div style="background: #E0F8D0; border-bottom: 3px solid #346856; padding: 10px 16px; display: flex; gap: 14px; align-items: center;">
+<span style="font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1.5px;">► start</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ archive</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ tools</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ config</span>
+<span style="flex:1;"></span>
+<span style="font-size: 10px; color: #346856;">v0.1a</span>
+</div>
+
+<div style="padding: 22px 20px 12px; display: grid; grid-template-columns: 1fr 128px; gap: 16px; align-items: center;">
+<div>
+<div style="font-size: 22px; font-weight: 500; color: #081820; line-height: 1.35; margin-bottom: 4px; letter-spacing: 1px;">粘贴链接 <span style="color: #346856;">►</span> 得到笔记</div>
+<div style="font-size: 11px; color: #346856; margin-bottom: 20px; letter-spacing: 1px;">support :: bilibili / xiaohongshu</div>
+
+<div style="background: #FFFFFF; border: 3px solid #C13030; padding: 0; display: flex; align-items: stretch;">
+<div style="padding: 10px 12px; background: #FCEBEB; border-right: 2px solid #C13030; font-size: 12px; color: #C13030; font-weight: 500;">URL:</div>
+<span style="flex: 1; padding: 8px 10px; font-size: 12px; color: #081820; align-self: center; letter-spacing: 0.3px;">asdf://random-string<span class="cursor"></span></span>
+<button style="background: #E0F8D0; color: #88C070; border: none; padding: 8px 16px; font-size: 12px; font-weight: 500; font-family: var(--font-mono); letter-spacing: 2px; cursor: not-allowed; border-left: 3px solid #C13030;">▶ go</button>
+</div>
+
+<div style="display: flex; align-items: flex-start; gap: 8px; margin-top: 8px; padding: 8px 10px; background: #FCEBEB; border-left: 3px solid #C13030;">
+<i class="ti ti-alert-triangle" style="font-size: 14px; color: #C13030; margin-top: 1px;"></i>
+<div style="flex: 1; font-size: 11px; color: #C13030; letter-spacing: 0.5px; line-height: 1.55;">
+<div style="font-weight: 500; margin-bottom: 2px;">这不像是 B 站或小红书链接</div>
+<div style="color: #791F1F;">支持的形式:<code style="background: #FFFFFF; padding: 1px 4px; border: 1px solid #C13030;">bilibili.com/video/BV…</code> · <code style="background: #FFFFFF; padding: 1px 4px; border: 1px solid #C13030;">b23.tv/…</code> · <code style="background: #FFFFFF; padding: 1px 4px; border: 1px solid #C13030;">xiaohongshu.com/explore/…</code></div>
+</div>
+</div>
+
+<div style="display: flex; gap: 6px; margin-top: 14px;">
+<span style="font-size: 10px; padding: 3px 8px; background: #88C070; color: #081820; border: 2px solid #081820; letter-spacing: 1px; font-weight: 500;">B站</span>
+<span style="font-size: 10px; padding: 3px 8px; background: #E0F8D0; color: #081820; border: 2px solid #081820; letter-spacing: 1px; font-weight: 500;">小红书图文</span>
+<span style="font-size: 10px; padding: 3px 8px; background: #E0F8D0; color: #081820; border: 2px solid #081820; letter-spacing: 1px; font-weight: 500;">小红书视频</span>
+</div>
+</div>
+
+<svg viewBox="0 0 100 128" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; shape-rendering: crispEdges;">
+<rect x="26" y="0" width="8" height="8" fill="#346856"/><rect x="66" y="0" width="8" height="8" fill="#346856"/>
+<rect x="28" y="2" width="4" height="4" fill="#88C070"/><rect x="68" y="2" width="4" height="4" fill="#88C070"/>
+<rect x="28" y="8" width="4" height="8" fill="#081820"/><rect x="68" y="8" width="4" height="8" fill="#081820"/>
+<text x="70" y="16" font-family="ui-monospace, monospace" font-size="14" font-weight="700" fill="#C13030">?</text>
+<rect x="20" y="18" width="60" height="4" fill="#081820" transform="rotate(-6 50 20)"/>
+<rect x="20" y="22" width="60" height="8" fill="#346856" transform="rotate(-6 50 26)"/>
+<g transform="rotate(-6 50 45)">
+<rect x="16" y="26" width="4" height="28" fill="#346856"/><rect x="80" y="26" width="4" height="28" fill="#346856"/>
+<rect x="20" y="22" width="4" height="32" fill="#081820"/><rect x="76" y="22" width="4" height="32" fill="#081820"/>
+<rect x="24" y="30" width="52" height="24" fill="#E0F8D0"/>
+<rect x="20" y="54" width="60" height="4" fill="#081820"/>
+<rect x="32" y="34" width="8" height="8" fill="#081820"/><rect x="60" y="34" width="8" height="8" fill="#081820"/>
+<rect x="34" y="34" width="2" height="2" fill="#E0F8D0"/><rect x="62" y="34" width="2" height="2" fill="#E0F8D0"/>
+<rect x="26" y="44" width="4" height="4" fill="#88C070"/><rect x="70" y="44" width="4" height="4" fill="#88C070"/>
+<rect x="46" y="48" width="8" height="2" fill="#081820" transform="rotate(6 50 49)"/>
+</g>
+<rect x="30" y="62" width="4" height="24" fill="#081820"/><rect x="66" y="62" width="4" height="24" fill="#081820"/>
+<rect x="30" y="62" width="40" height="4" fill="#081820"/><rect x="30" y="82" width="40" height="4" fill="#081820"/>
+<rect x="34" y="66" width="32" height="16" fill="#E0F8D0"/>
+<rect x="44" y="70" width="4" height="4" fill="#346856"/><rect x="52" y="70" width="4" height="4" fill="#346856"/>
+<rect x="42" y="74" width="16" height="4" fill="#346856"/><rect x="44" y="78" width="12" height="2" fill="#346856"/>
+<rect x="48" y="80" width="4" height="2" fill="#346856"/>
+<rect x="22" y="62" width="8" height="16" fill="#346856"/><rect x="22" y="62" width="8" height="4" fill="#081820"/><rect x="22" y="74" width="8" height="4" fill="#081820"/>
+<rect x="70" y="62" width="8" height="16" fill="#346856"/><rect x="70" y="62" width="8" height="4" fill="#081820"/><rect x="70" y="74" width="8" height="4" fill="#081820"/>
+<rect x="26" y="86" width="48" height="4" fill="#346856"/><rect x="22" y="90" width="56" height="4" fill="#346856"/>
+<rect x="22" y="86" width="4" height="4" fill="#081820"/><rect x="74" y="86" width="4" height="4" fill="#081820"/>
+<rect x="18" y="90" width="4" height="4" fill="#081820"/><rect x="78" y="90" width="4" height="4" fill="#081820"/>
+<rect x="34" y="94" width="8" height="12" fill="#081820"/><rect x="58" y="94" width="8" height="12" fill="#081820"/>
+<rect x="36" y="94" width="4" height="10" fill="#346856"/><rect x="60" y="94" width="4" height="10" fill="#346856"/>
+<rect x="28" y="106" width="18" height="6" fill="#081820"/><rect x="54" y="106" width="18" height="6" fill="#081820"/>
+</svg>
+</div>
+
+<div style="padding: 8px 20px 20px;">
+<div style="font-size: 10px; color: #081820; letter-spacing: 2.5px; margin-bottom: 8px; font-weight: 500;">── save files ────────────────────────────────</div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+<div style="background: #E0F8D0; border: 3px solid #081820; padding: 8px;">
+<div style="height: 42px; background: #88C070; border: 2px solid #081820; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;"><i class="ti ti-brand-bilibili" style="font-size: 20px; color: #081820;"></i></div>
+<div style="font-size: 10px; color: #081820; font-weight: 500; margin-bottom: 3px;">深度学习入门</div>
+<div style="font-size: 9px; color: #346856; letter-spacing: 1.5px;">42:18 min</div>
+</div>
+<div style="background: #E0F8D0; border: 3px solid #081820; padding: 8px;">
+<div style="height: 42px; background: #88C070; border: 2px solid #081820; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;"><i class="ti ti-photo" style="font-size: 20px; color: #081820;"></i></div>
+<div style="font-size: 10px; color: #081820; font-weight: 500; margin-bottom: 3px;">健身餐搭配</div>
+<div style="font-size: 9px; color: #346856; letter-spacing: 1.5px;">img.post</div>
+</div>
+<div style="background: #E0F8D0; border: 3px solid #081820; padding: 8px;">
+<div style="height: 42px; background: #88C070; border: 2px solid #081820; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;"><i class="ti ti-video" style="font-size: 20px; color: #081820;"></i></div>
+<div style="font-size: 10px; color: #081820; font-weight: 500; margin-bottom: 3px;">Vlog 剪辑</div>
+<div style="font-size: 9px; color: #346856; letter-spacing: 1.5px;">short.vid</div>
+</div>
+</div>
+</div>
+
+<div style="background: #88C070; border-top: 4px solid #081820; padding: 7px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #081820; letter-spacing: 2px; font-weight: 500;">
+<span>▲▼ select</span><span>[A] confirm</span><span>[B] back</span><span>▓▓▓▓░░ 68%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mockup-caption">v1.2 · <code>HP-03</code> · Pixel · 首页 · URL 无效(红边框 + 红提示 + DownBot Thinking + 按钮禁用)· <code>pixel-homepage-invalid.html</code></div>
+</body>
+</html>

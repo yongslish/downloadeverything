@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Pixel · 归档页 · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root { --color-background-secondary: #EEEEEE; --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --border-radius-lg: 12px; }
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+.chip {
+  font-size: 10px; padding: 4px 9px; background: #E0F8D0; color: #081820;
+  border: 2px solid #081820; letter-spacing: 1px; font-weight: 500;
+  cursor: pointer;
+}
+.chip.on { background: #081820; color: #E0F8D0; }
+.row {
+  display: flex; align-items: center; gap: 12px; padding: 8px 10px;
+  border-top: 1px dashed #88C070;
+}
+.row:first-child { border-top: none; }
+.row.hover { background: #FFF9C4; border: 3px solid #081820; padding: 6px 8px; margin: -1px 0; }
+.thumb {
+  width: 40px; height: 40px; border: 2px solid #081820; display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+}
+.title { font-size: 12px; color: #081820; font-weight: 500; margin-bottom: 2px; }
+.meta { font-size: 10px; color: #346856; letter-spacing: 0.5px; }
+.tag { font-size: 9px; padding: 1px 5px; letter-spacing: 1px; font-weight: 500; }
+.tag-done { color: #E0F8D0; background: #346856; }
+.tag-pending { color: #346856; background: transparent; border: 1px solid #346856; }
+.act {
+  background: transparent; border: 2px solid #081820; padding: 3px 8px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px;
+  font-weight: 500; cursor: pointer; color: #081820;
+}
+.act.danger { color: #C13030; border-color: #C13030; }
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #E0F8D0; overflow: hidden; border: 4px solid #081820; font-family: var(--font-mono);">
+
+<div style="background: #88C070; border-bottom: 4px solid #081820; padding: 7px 12px; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span>
+<span style="flex:1; text-align: center; font-size: 11px; color: #081820; letter-spacing: 3px; font-weight: 500;">▓▒░ archive ░▒▓</span>
+<span style="font-size: 10px; color: #081820;">[×]</span>
+</div>
+
+<div style="background: #E0F8D0; border-bottom: 3px solid #346856; padding: 10px 16px; display: flex; gap: 14px; align-items: center;">
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ start</span>
+<span style="font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1.5px;">► archive</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ tools</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ config</span>
+<span style="flex:1;"></span>
+<span style="font-size: 10px; color: #346856;">12 saves</span>
+</div>
+
+<div style="padding: 16px 20px 8px;">
+<div style="font-size: 10px; color: #081820; letter-spacing: 2.5px; margin-bottom: 12px; font-weight: 500;">── save files ────────────────────────────────</div>
+
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 3px; display: flex; align-items: stretch; margin-bottom: 10px;">
+<div style="padding: 8px 12px; background: #E0F8D0; border-right: 2px solid #081820; font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1px;">search:</div>
+<span style="flex: 1; padding: 8px 10px; font-size: 12px; color: #88C070; align-self: center;">按标题、来源、作者、标签…</span>
+<div style="padding: 8px 12px; font-size: 10px; color: #346856; letter-spacing: 1.5px; align-self: center; border-left: 2px solid #081820;">
+sort: 生成日期 ▼
+</div>
+</div>
+
+<div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+<span class="chip on">all(12)</span>
+<span class="chip">B站(4)</span>
+<span class="chip">小红书图文(5)</span>
+<span class="chip">小红书视频(3)</span>
+<span style="width: 8px;"></span>
+<span class="chip">已导出(6)</span>
+<span class="chip">未导出(6)</span>
+</div>
+
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 4px;">
+
+<div class="row">
+<div class="thumb" style="background: #88C070;"><i class="ti ti-brand-bilibili" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="title">深度学习入门到实践</div>
+<div class="meta">bilibili · 42:18 · 沐神 · 2026-07-02 · <span class="tag tag-pending">未导出</span></div>
+</div>
+<div style="font-family: var(--font-mono); font-size: 10px; color: #346856; letter-spacing: 1px;">just now</div>
+</div>
+
+<div class="row">
+<div class="thumb" style="background: #FFB89A;"><i class="ti ti-photo" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="title">早餐 5 个不踩雷的搭配</div>
+<div class="meta">xiaohongshu · 图文 · 8 张图 · @柠檬博主 · 2026-07-01 · <span class="tag tag-done">.md ✓</span></div>
+</div>
+<div style="font-family: var(--font-mono); font-size: 10px; color: #346856; letter-spacing: 1px;">1d</div>
+</div>
+
+<div class="row hover">
+<div class="thumb" style="background: #B5E4C8;"><i class="ti ti-video" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="title">Vlog 剪辑思路 · 3 个 tips</div>
+<div class="meta">xiaohongshu · 视频 · 2:34 · @阿沐 · 2026-06-30 · <span class="tag tag-done">.md ✓ obsidian ✓</span></div>
+</div>
+<button class="act">open</button>
+<button class="act">.md</button>
+<button class="act danger">del</button>
+</div>
+
+<div class="row">
+<div class="thumb" style="background: #88C070;"><i class="ti ti-brand-bilibili" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="title">前端面试真题 · 从简历到 offer</div>
+<div class="meta">bilibili · 1:12:45 · @码农老张 · 2026-06-28 · <span class="tag tag-done">.md ✓</span></div>
+</div>
+<div style="font-family: var(--font-mono); font-size: 10px; color: #346856; letter-spacing: 1px;">4d</div>
+</div>
+
+<div class="row">
+<div class="thumb" style="background: #FFB89A;"><i class="ti ti-photo" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="title">断舍离一年的心得</div>
+<div class="meta">xiaohongshu · 图文 · 12 张图 · @空空 · 2026-06-27 · <span class="tag tag-pending">未导出</span></div>
+</div>
+<div style="font-family: var(--font-mono); font-size: 10px; color: #346856; letter-spacing: 1px;">5d</div>
+</div>
+
+<div class="row">
+<div class="thumb" style="background: #B5E4C8;"><i class="ti ti-video" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="title">咖啡师入门 · 手冲第一步</div>
+<div class="meta">xiaohongshu · 视频 · 3:12 · @熊 · 2026-06-25 · <span class="tag tag-pending">未导出</span></div>
+</div>
+<div style="font-family: var(--font-mono); font-size: 10px; color: #346856; letter-spacing: 1px;">7d</div>
+</div>
+
+<div class="row">
+<div class="thumb" style="background: #88C070;"><i class="ti ti-brand-bilibili" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="title">深度学习 P2 · 反向传播详解</div>
+<div class="meta">bilibili · 38:22 · 沐神 · 2026-06-24 · <span class="tag tag-done">.md ✓</span></div>
+</div>
+<div style="font-family: var(--font-mono); font-size: 10px; color: #346856; letter-spacing: 1px;">8d</div>
+</div>
+
+<div class="row">
+<div class="thumb" style="background: #FFB89A;"><i class="ti ti-photo" style="font-size: 20px; color: #081820;"></i></div>
+<div style="flex: 1;">
+<div class="title">Notion 高手秘诀</div>
+<div class="meta">xiaohongshu · 图文 · 10 张图 · @生产力 · 2026-06-22 · <span class="tag tag-pending">未导出</span></div>
+</div>
+<div style="font-family: var(--font-mono); font-size: 10px; color: #346856; letter-spacing: 1px;">10d</div>
+</div>
+
+</div>
+
+<div style="display: flex; align-items: center; margin-top: 10px; font-size: 10px; color: #346856; letter-spacing: 1px;">
+<span>showing 1-8 of 12</span>
+<span style="flex:1;"></span>
+<button class="act" style="padding: 4px 10px;">◀ prev</button>
+<span style="margin: 0 10px; color: #081820; font-weight: 500;">page 1 / 2</span>
+<button class="act" style="padding: 4px 10px;">next ▶</button>
+</div>
+</div>
+
+<div style="background: #88C070; border-top: 4px solid #081820; padding: 7px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #081820; letter-spacing: 2px; font-weight: 500;">
+<span>▲▼ select</span><span>[A] open</span><span>[X] batch</span><span>storage ▓▓░░░░ 24%</span>
+</div>
+
+</div>
+</div>
+</div>
+<div class="mockup-caption">v1.2 · <code>AR-01</code> · Pixel · 归档默认页 · 12 saves · 搜索 / 筛选 / 排序 / 分页 · 第三行 hover 展示 open/.md/del actions · <code>pixel-archive.html</code></div>
+</body>
+</html>

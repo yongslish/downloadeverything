@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Downspace Mockups · v1.0</title>
+<style>
+:root {
+  --ink: #2A2418;
+  --ink-red: #8B2A1E;
+  --paper: #F0E6D2;
+  --paper-dark: #E5D9BE;
+  --muted: #5A4834;
+  --hint: #8A7B6A;
+}
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, -apple-system, sans-serif; color: var(--ink); }
+body { padding: 40px 20px 80px; }
+.wrap { max-width: 760px; margin: 0 auto; background: var(--paper); border: 1px solid var(--ink); }
+.masthead { text-align: center; padding: 24px 24px 12px; border-bottom: 3px double var(--ink); }
+.masthead .est { font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 4px; margin-bottom: 6px; }
+.masthead h1 { font-family: 'Source Serif 4', 'Songti SC', Georgia, serif; font-size: 42px; font-weight: 500; margin: 0; letter-spacing: 2px; line-height: 1; }
+.masthead .tag { font-family: 'Source Serif 4', 'Songti SC', Georgia, serif; font-style: italic; color: var(--ink-red); margin-top: 8px; font-size: 12px; }
+.editionbar { display: flex; padding: 6px 24px; border-bottom: 1px solid var(--ink); font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 1.5px; }
+.editionbar span { flex: 1; text-align: center; }
+.editionbar span:first-child { text-align: left; }
+.editionbar span:last-child { text-align: right; }
+.section { padding: 22px 28px; border-bottom: 1px dashed var(--hint); }
+.section:last-child { border-bottom: none; }
+.section-label { font-family: ui-monospace, Menlo, monospace; font-size: 10px; color: var(--ink-red); letter-spacing: 3px; margin-bottom: 12px; font-weight: 500; }
+.section h2 { font-family: 'Source Serif 4', 'Songti SC', Georgia, serif; font-size: 22px; font-weight: 500; margin: 0 0 4px; letter-spacing: -0.3px; }
+.section p.lead { font-family: 'Source Serif 4', 'Songti SC', Georgia, serif; font-style: italic; color: var(--muted); font-size: 13px; margin: 0 0 16px; line-height: 1.5; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.card {
+  border: 1px solid var(--ink);
+  padding: 12px 14px 14px;
+  background: #FFFFFF;
+  text-decoration: none;
+  color: var(--ink);
+  display: block;
+  transition: background 120ms;
+}
+.card:hover { background: var(--paper-dark); }
+.card .kicker { font-family: ui-monospace, Menlo, monospace; font-size: 9px; color: var(--ink-red); letter-spacing: 2px; margin-bottom: 6px; font-weight: 500; }
+.card .title { font-family: 'Source Serif 4', 'Songti SC', Georgia, serif; font-size: 15px; font-weight: 500; line-height: 1.25; margin-bottom: 4px; }
+.card .meta { font-family: 'Source Serif 4', 'Songti SC', Georgia, serif; font-size: 10px; color: var(--muted); font-style: italic; }
+.tail { padding: 12px 28px; background: var(--paper-dark); border-top: 1px solid var(--ink); font-family: ui-monospace, Menlo, monospace; font-size: 9px; color: var(--muted); letter-spacing: 2px; display: flex; justify-content: space-between; }
+.doc-link { display: inline-block; margin-top: 8px; padding: 6px 10px; background: var(--ink); color: var(--paper); font-family: ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 1.5px; text-decoration: none; }
+.doc-link:hover { background: var(--ink-red); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div class="est">EST · JULY · MMXXVI</div>
+    <h1>Downspace Mockups</h1>
+    <div class="tag">"改错了能对照回来的地方"</div>
+  </div>
+
+  <div class="editionbar">
+    <span>DESIGN v1.0</span>
+    <span>— MOCKUP INDEX —</span>
+    <span>2026-07-02</span>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ 主设计规范 ━━</div>
+    <h2>Design System v1.0</h2>
+    <p class="lead">Token、骨架、DownBot 精灵表、页面清单、皮肤切换机制、内容适配矩阵、变更管理 —— 一份主文档全都有。</p>
+    <a class="doc-link" href="../design-system.md">↗ 打开 design-system.md</a>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ PIXEL RETRO(默认骨架) ━━</div>
+    <h2>Pixel 三页全链路</h2>
+    <p class="lead">GameBoy 屏绿 · 4px 硬边框 · [A][B][Y] 手柄键位 · DownBot 4px 像素精灵。此为 v1 默认皮肤。Kawaii / Y2K 复用同一骨架,只换 CSS 变量。</p>
+    <div class="grid">
+      <a class="card" href="pixel-homepage.html">
+        <div class="kicker">— HOME · [1] —</div>
+        <div class="title">首页 · 粘贴链接</div>
+        <div class="meta">URL 输入 · 最近笔记 3 张</div>
+      </a>
+      <a class="card" href="pixel-processing.html">
+        <div class="kicker">— PROCESSING · [2] —</div>
+        <div class="title">处理中 · Stage 4/6</div>
+        <div class="meta">像素街景 · 阶段清单 · HP 条</div>
+      </a>
+      <a class="card" href="pixel-result.html">
+        <div class="kicker">— RESULT · [3] —</div>
+        <div class="title">结果页 · Save File</div>
+        <div class="meta">笔记 + Transcript 双栏 · 时间戳跳转</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ NEWSPAPER(独立骨架) ━━</div>
+    <h2>Newspaper 三页全链路</h2>
+    <p class="lead">纸色底 · Serif 字体 · 双横线报头 · 报社流程隐喻 · 结果页本身就是一份三栏头版。适合文青 / 手账党 / 阅读党。</p>
+    <div class="grid">
+      <a class="card" href="newspaper-homepage.html">
+        <div class="kicker">— HOME · [4] —</div>
+        <div class="title">首页 · Lead Story</div>
+        <div class="meta">报头 · URL 输入 · From the Archive</div>
+      </a>
+      <a class="card" href="newspaper-processing.html">
+        <div class="kicker">— PROCESSING · [5] —</div>
+        <div class="title">处理中 · Going to Press</div>
+        <div class="meta">编辑部流程 · DownBot 于案上 · Deadline 条</div>
+      </a>
+      <a class="card" href="newspaper-result.html">
+        <div class="kicker">— RESULT · [6] —</div>
+        <div class="title">结果页 · Feature Story</div>
+        <div class="meta">三栏排版 · 首字下沉 · 速记稿分栏</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ V1.1 · P0 快照补齐(2026-07-02) ━━</div>
+    <h2>关键交互状态</h2>
+    <p class="lead">v1.0 只有"代表性快照"。这一批把 5 个 P0 快照补齐 —— 首页空态、Provider 中断 modal、小红书图文变体、时间戳联动高亮、设置页。覆盖率 27% → 44%。完整清单见 <a href="../design-system.md" style="color: var(--ink-red);">design-system.md § 十二</a>。</p>
+    <div class="grid">
+      <a class="card" href="pixel-homepage-empty.html">
+        <div class="kicker">— HP-02 —</div>
+        <div class="title">首页 · 空态</div>
+        <div class="meta">首次打开 · 0 saves · DownBot 引导</div>
+      </a>
+      <a class="card" href="pixel-processing-provider-modal.html">
+        <div class="kicker">— PR-05 —</div>
+        <div class="title">处理 · Provider modal</div>
+        <div class="meta">中断态 · [Y] funasr / [N] config</div>
+      </a>
+      <a class="card" href="pixel-result-xhs-image.html">
+        <div class="kicker">— RS-02 —</div>
+        <div class="title">结果 · 小红书图文</div>
+        <div class="meta">无时间戳 · 段卡 + 图缩略</div>
+      </a>
+      <a class="card" href="pixel-result-timestamp-active.html">
+        <div class="kicker">— RS-04 —</div>
+        <div class="title">结果 · 时间戳点击</div>
+        <div class="meta">双栏联动高亮 · 500ms</div>
+      </a>
+      <a class="card" href="pixel-config.html">
+        <div class="kicker">— CF-01 —</div>
+        <div class="title">设置 · 7 分区</div>
+        <div class="meta">Skin · ASR · LLM · Prompt · Export · Data</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ V1.2 · P1 快照批 1(2026-07-02) ━━</div>
+    <h2>常错路径 + 两个新页</h2>
+    <p class="lead">v1.1 后 44%。这一批补 4 张 —— 用户最容易撞上的 URL 无效错、处理失败态,还有 archive / tools 两个 nav 点击就到的页面。覆盖率提到 60%。</p>
+    <div class="grid">
+      <a class="card" href="pixel-homepage-invalid.html">
+        <div class="kicker">— HP-03 —</div>
+        <div class="title">首页 · URL 无效</div>
+        <div class="meta">红边框 + 红提示 + DownBot 歪头 · 按钮禁用</div>
+      </a>
+      <a class="card" href="pixel-processing-failed.html">
+        <div class="kicker">— PR-02 —</div>
+        <div class="title">处理 · 失败态</div>
+        <div class="meta">Stage 5 LLM Key 无效 · retry / config / feedback</div>
+      </a>
+      <a class="card" href="pixel-archive.html">
+        <div class="kicker">— AR-01 —</div>
+        <div class="title">归档 · 完整列表</div>
+        <div class="meta">12 saves · 搜索 · 筛选 · 分页 · hover actions</div>
+      </a>
+      <a class="card" href="pixel-tools.html">
+        <div class="kicker">— TL-01 —</div>
+        <div class="title">工具箱 · 3 工具卡</div>
+        <div class="meta">下载 · 本地 ASR · 字幕格式转换</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ V1.2 · P1 快照批 2(2026-07-02) ━━</div>
+    <h2>Pixel 全链路完备</h2>
+    <p class="lead">Pixel 剩下 7 张全部落地 —— 处理长任务 / Stage 1 / 小红书视频 / 编辑模式 / 归档空态 / 归档筛选 / 工具上传后。这批之后 Pixel 骨架前端可以开工。覆盖率 60% → 88%。</p>
+    <div class="grid">
+      <a class="card" href="pixel-processing-long.html">
+        <div class="kicker">— PR-03 —</div>
+        <div class="title">处理 · 长任务泡泡</div>
+        <div class="meta">DownBot"我在努力"· elapsed 1m 12s · 点她再打招呼</div>
+      </a>
+      <a class="card" href="pixel-processing-early.html">
+        <div class="kicker">— PR-04 —</div>
+        <div class="title">处理 · Stage 1 早期</div>
+        <div class="meta">刚启动 · 平台识别中 · DownBot 抱 URL 便利贴跑</div>
+      </a>
+      <a class="card" href="pixel-result-xhs-video.html">
+        <div class="kicker">— RS-03 —</div>
+        <div class="title">结果 · 小红书视频</div>
+        <div class="meta">2:34 · 短时间戳密集(7 条) · FunASR 转录</div>
+      </a>
+      <a class="card" href="pixel-result-edit.html">
+        <div class="kicker">— RS-05 —</div>
+        <div class="title">结果 · 编辑模式</div>
+        <div class="meta">3 fields unsaved · 时间戳可调 · save / cancel / revert</div>
+      </a>
+      <a class="card" href="pixel-archive-empty.html">
+        <div class="kicker">— AR-02 —</div>
+        <div class="title">归档 · 空态</div>
+        <div class="meta">0 saves · 全 disabled · DownBot 引导去 start</div>
+      </a>
+      <a class="card" href="pixel-archive-filtered.html">
+        <div class="kicker">— AR-03 —</div>
+        <div class="title">归档 · 筛选态</div>
+        <div class="meta">仅小红书图文(5/12) · 黄底 clear 提示条</div>
+      </a>
+      <a class="card" href="pixel-tools-uploaded.html">
+        <div class="kicker">— TL-02 —</div>
+        <div class="title">工具箱 · 文件上传后</div>
+        <div class="meta">其他工具折叠 · 文件预览 + 处理预计 + remove</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ V1.3 · NEWSPAPER 变体全(2026-07-02) ━━</div>
+    <h2>Newspaper 完备</h2>
+    <p class="lead">Newspaper 骨架收尾 —— 空态 + 归档合订本目录。用户想要哪个骨架都能开工。覆盖率 88% → 96%。</p>
+    <div class="grid">
+      <a class="card" href="newspaper-homepage-empty.html">
+        <div class="kicker">— NP-04 —</div>
+        <div class="title">Newspaper · 空态</div>
+        <div class="meta">Premiere Issue · italic 引导 · d.bot 待岗</div>
+      </a>
+      <a class="card" href="newspaper-archive.html">
+        <div class="kicker">— NP-05 —</div>
+        <div class="title">Newspaper · Bound Volume</div>
+        <div class="meta">按月分栏 · 目录页 § 编号 + p.页码 + 分类标</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ V1.4 · 尾巴(不阻塞开发) ━━</div>
+    <h2>只剩一张 · IN-01</h2>
+    <p class="lead">剩下唯一一张 <strong>IN-01</strong> —— 皮肤切换实时对照(3 皮肤同页)。这是"设计验证"用途,不是任何路径上的必经页,前端开发不需要它。等 v1 UI 组件化时再顺手做即可。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">━━ BACKLOG · V2 探索方向 ━━</div>
+    <h2>Arcade Marquee 真像素</h2>
+    <p class="lead">用户参考 "NOW SHOWING · FABLE 5" 提出的方向 —— 点阵 LED 显示屏 + 半色调网点 + 发光字体,是"戏院 marquee / street arcade"美学,和当前 GameBoy 屏内像素不同气质。适合作独立处理页 / 完成庆祝页 / 营销落地页,不占 v1 皮肤名额,列为 <strong>v2 探索方向</strong>。</p>
+  </div>
+
+  <div class="tail">
+    <span>PRINTED LOCALLY · docs/mockups/</span>
+    <span>END OF INDEX</span>
+  </div>
+</div>
+</body>
+</html>

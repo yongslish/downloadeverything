@@ -31,8 +31,19 @@ test('adds anti-blocking request headers only for Bilibili', () => {
     '--add-header', 'Origin:https://www.bilibili.com',
     '--add-header', 'Referer:https://www.bilibili.com/',
   ]);
-  assert.deepEqual(provider.platformRequestArgs({ platform: 'YouTube' }), []);
-  assert.deepEqual(provider.platformRequestArgs({ platform: '抖音' }), []);
+  assert.deepEqual(provider.platformRequestArgs({ platform: 'other' }), []);
+});
+
+test('only handles Bilibili (YouTube/抖音 support was removed, not just hidden)', () => {
+  const provider = new YtDlpProvider({
+    downloadDir: '',
+    ytDlpPath: '',
+    presets: {},
+    maxJobRuntimeMs: 1,
+  });
+  assert.equal(provider.canHandle({ platform: 'Bilibili' }), true);
+  assert.equal(provider.canHandle({ platform: 'YouTube' }), false);
+  assert.equal(provider.canHandle({ platform: '抖音' }), false);
 });
 
 test('extracts plain text from Xunfei orderResult lattice', () => {

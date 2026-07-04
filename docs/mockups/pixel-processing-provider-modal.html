@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Pixel · Provider 中断 modal · Downspace Design v1.0</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+:root { --color-background-secondary: #EEEEEE; --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --border-radius-lg: 12px; }
+html, body { margin: 0; padding: 0; background: #DADADA; font-family: system-ui, sans-serif; }
+body { padding: 24px 12px; }
+.mockup { max-width: 704px; margin: 0 auto; }
+.mockup-caption { max-width: 704px; margin: 16px auto 0; padding: 0 12px; font-size: 12px; color: #666; text-align: center; }
+</style>
+</head>
+<body>
+<div class="mockup">
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 12px;">
+<div style="background: #E0F8D0; overflow: hidden; border: 4px solid #081820; font-family: var(--font-mono); position: relative;">
+
+<div style="background: #88C070; border-bottom: 4px solid #081820; padding: 7px 12px; display: flex; align-items: center; gap: 6px;">
+<span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span><span style="width: 8px; height: 8px; background: #081820;"></span>
+<span style="flex:1; text-align: center; font-size: 11px; color: #081820; letter-spacing: 3px; font-weight: 500;">▓▒░ processing... ░▒▓</span>
+<span style="font-size: 10px; color: #081820;">[×]</span>
+</div>
+<div style="background: #E0F8D0; border-bottom: 3px solid #346856; padding: 10px 16px; display: flex; gap: 14px; align-items: center;">
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ start</span>
+<span style="font-size: 11px; color: #081820; font-weight: 500; letter-spacing: 1.5px;">► loading</span>
+<span style="font-size: 11px; color: #346856; letter-spacing: 1.5px;">◇ archive</span>
+<span style="flex:1;"></span>
+<span style="font-size: 10px; color: #346856; letter-spacing: 1px;">paused</span>
+</div>
+<div style="padding: 14px 20px 8px; opacity: 0.35;">
+<div style="font-size: 10px; color: #346856; letter-spacing: 2px; margin-bottom: 4px; font-weight: 500;">▲ now loading ▲</div>
+<div style="font-size: 16px; color: #081820; font-weight: 500;">李某某访谈录(全程无字幕)</div>
+<div style="font-size: 11px; color: #346856; letter-spacing: 1px;">bilibili · 68:42 · @访谈实录 UP</div>
+</div>
+<div style="padding: 4px 20px 12px; opacity: 0.35;">
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 12px 14px;">
+<div style="font-size: 10px; color: #081820; font-weight: 500; letter-spacing: 2px; margin-bottom: 10px;">── stage progress ────────────────────────────</div>
+<div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; color: #081820;">
+<div style="display: flex; justify-content: space-between;"><span>[✓] 抓取视频</span><span style="color: #346856; letter-spacing: 1.5px;">▓▓▓▓▓ done</span></div>
+<div style="display: flex; justify-content: space-between;"><span>[✓] 取标题和简介</span><span style="color: #346856; letter-spacing: 1.5px;">▓▓▓▓▓ done</span></div>
+<div style="display: flex; justify-content: space-between; background: #E0F8D0; padding: 4px 6px; margin: -4px -6px; font-weight: 500;"><span>[►] 找到原生字幕</span><span style="letter-spacing: 1.5px;">▓▓▓▓░ 90%</span></div>
+<div style="display: flex; justify-content: space-between; color: #88C070;"><span>[ ] 整理完整文本</span><span style="letter-spacing: 1.5px;">░░░░░ wait</span></div>
+<div style="display: flex; justify-content: space-between; color: #88C070;"><span>[ ] 生成学习笔记</span><span style="letter-spacing: 1.5px;">░░░░░ wait</span></div>
+<div style="display: flex; justify-content: space-between; color: #88C070;"><span>[ ] 准备导出</span><span style="letter-spacing: 1.5px;">░░░░░ wait</span></div>
+</div>
+</div>
+</div>
+<div style="background: #88C070; border-top: 4px solid #081820; padding: 10px 16px; display: flex; align-items: center; gap: 14px; font-size: 11px; color: #081820; font-weight: 500; opacity: 0.35;">
+<span style="letter-spacing: 1.5px;">HP</span>
+<span style="letter-spacing: 1px; font-size: 12px;">▓▓▓▓░░░░░░░░░░</span>
+<span style="letter-spacing: 1px;">stage 3/6</span>
+<span style="flex:1;"></span>
+<span style="letter-spacing: 1.5px;">paused</span>
+</div>
+
+<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(8, 24, 32, 0.55); display: flex; align-items: center; justify-content: center; padding: 20px;">
+<div style="background: #E0F8D0; border: 4px solid #081820; max-width: 480px; width: 100%; font-family: var(--font-mono);">
+<div style="background: #C13030; padding: 7px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 4px solid #081820;">
+<i class="ti ti-alert-triangle" style="font-size: 14px; color: #FFF;"></i>
+<span style="flex:1; font-size: 11px; color: #FFFFFF; font-weight: 500; letter-spacing: 2px;">▓▒░ ATTENTION ░▒▓</span>
+<span style="font-size: 10px; color: #FFFFFF;">[esc]</span>
+</div>
+<div style="padding: 20px 22px 8px;">
+<div style="font-size: 10px; color: #C13030; letter-spacing: 2px; margin-bottom: 6px; font-weight: 500;">━━ no subtitle found ━━</div>
+<div style="font-size: 17px; color: #081820; font-weight: 500; margin-bottom: 8px; line-height: 1.35;">这个视频没有原生字幕,需要 ASR</div>
+<div style="font-size: 12px; color: #346856; line-height: 1.65; margin-bottom: 14px;">你尚未配置任何付费 Provider(讯飞 / 腾讯 / OpenAI)。有两条路可以走:</div>
+
+<div style="background: #FFFFFF; border: 3px solid #081820; padding: 10px 12px; margin-bottom: 8px;">
+<div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;">
+<span style="font-size: 12px; color: #081820; font-weight: 500;">[Y]</span>
+<span style="font-size: 13px; color: #081820; font-weight: 500;">用本地 FunASR(免费,慢一些)</span>
+</div>
+<div style="font-size: 11px; color: #346856; line-height: 1.55; padding-left: 24px;">中文识别质量好、零 API 费、音频不出本机 · 首次需下载模型 ≈ 900 MB · 68 分钟视频估算 ≈ 3-5 分钟处理</div>
+</div>
+
+<div style="background: #FFFFFF; border: 3px solid #346856; padding: 10px 12px; margin-bottom: 14px;">
+<div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;">
+<span style="font-size: 12px; color: #346856; font-weight: 500;">[N]</span>
+<span style="font-size: 13px; color: #081820; font-weight: 500;">去 config 添加 Provider Key</span>
+</div>
+<div style="font-size: 11px; color: #346856; line-height: 1.55; padding-left: 24px;">走云端 API,更快、更抗噪 · 但需自备 Key,按量付费 · 会中止当前任务</div>
+</div>
+</div>
+
+<div style="background: #88C070; border-top: 4px solid #081820; padding: 8px 14px; display: flex; align-items: center; gap: 10px; font-size: 11px; color: #081820; font-weight: 500;">
+<span style="letter-spacing: 1.5px; color: #346856;">choose →</span>
+<span style="flex:1;"></span>
+<button style="background: #081820; color: #E0F8D0; border: 2px solid #081820; padding: 6px 14px; font-size: 11px; font-family: var(--font-mono); letter-spacing: 2px; font-weight: 500; cursor: pointer;">[Y] use funasr</button>
+<button style="background: transparent; color: #081820; border: 2px solid #081820; padding: 6px 14px; font-size: 11px; font-family: var(--font-mono); letter-spacing: 2px; font-weight: 500; cursor: pointer;">[N] go config</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div class="mockup-caption">v1.0 · <code>PR-05</code> · Pixel · 处理页 · Provider missing 中断 modal · <code>pixel-processing-provider-modal.html</code></div>
+</body>
+</html>
