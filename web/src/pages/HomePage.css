@@ -1,4 +1,4 @@
-/* HP-01 · Pixel Retro 首页 — mirrors docs/mockups/pixel-homepage.html.
+/* HP-01/02/03 · Pixel Retro 首页 — mirrors pixel-homepage*.html mockups.
  * All color values come from tokens.css --pxl-* so Kawaii and Y2K skins
  * inherit the layout unchanged. */
 
@@ -68,8 +68,58 @@
   letter-spacing: 2px;
 }
 .hp-url__go:disabled {
-  opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* HP-03 · URL 无效 — red border chrome + pale disabled go button. */
+.hp-url--invalid {
+  border-color: var(--pxl-danger);
+}
+.hp-url--invalid .hp-url__prefix {
+  background: #FCEBEB;
+  border-right-color: var(--pxl-danger);
+  color: var(--pxl-danger);
+}
+.hp-url--invalid .hp-url__go {
+  background: var(--pxl-bg);
+  color: var(--pxl-text-muted);
+  border-left-color: var(--pxl-danger);
+}
+
+.hp-invalid-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #FCEBEB;
+  border-left: 3px solid var(--pxl-danger);
+}
+.hp-invalid-hint i {
+  font-size: 14px;
+  color: var(--pxl-danger);
+  margin-top: 1px;
+}
+.hp-invalid-hint__body {
+  flex: 1;
+  font-size: 11px;
+  color: var(--pxl-danger);
+  letter-spacing: 0.5px;
+  line-height: 1.55;
+}
+.hp-invalid-hint__title {
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.hp-invalid-hint__forms {
+  color: #791F1F;
+}
+.hp-invalid-hint__forms code {
+  background: var(--pxl-surface-white);
+  padding: 1px 4px;
+  border: 1px solid var(--pxl-danger);
+  font-family: var(--font-mono);
+  font-size: 10px;
 }
 
 .hp-pills {
@@ -77,6 +127,7 @@
   gap: 6px;
   margin-top: 12px;
 }
+.hp-pills--invalid { margin-top: 14px; }
 .hp-pill {
   font-size: 10px;
   padding: 3px 8px;
@@ -97,6 +148,7 @@
   letter-spacing: 0.5px;
 }
 
+/* HP-01 · save files cards row (when the user has notes). */
 .hp-cards-section {
   padding: 8px 20px 20px;
 }
@@ -147,4 +199,31 @@
   font-size: 9px;
   color: var(--pxl-text-secondary);
   letter-spacing: 1.5px;
+}
+
+/* HP-02 · empty state — big DownBot + guidance in a dashed card. */
+.hp-empty-section {
+  padding: 12px 20px 24px;
+}
+.hp-empty {
+  background: var(--pxl-surface-white);
+  border: 3px dashed var(--pxl-frame-mid);
+  padding: 40px 20px;
+  text-align: center;
+}
+.hp-empty__bot {
+  margin: 0 auto 12px;
+  display: block;
+}
+.hp-empty__title {
+  font-size: 14px;
+  color: var(--pxl-text-primary);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.hp-empty__hint {
+  font-size: 11px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 1px;
 }
