@@ -1,0 +1,135 @@
+/* RS-01 · Pixel Retro 结果页 — mirrors docs/mockups/pixel-result.html. */
+
+.rs-header {
+  padding: 14px 20px 8px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+.rs-header__main { flex: 1; min-width: 0; }
+.rs-header__label {
+  font-size: 10px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+.rs-header__title {
+  font-size: 17px;
+  color: var(--pxl-text-primary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rs-header__meta {
+  font-size: 11px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+.rs-header__actions { display: flex; gap: 4px; }
+.rs-header__actions button {
+  background: var(--pxl-surface-white);
+  color: var(--pxl-text-primary);
+  border: 2px solid var(--pxl-frame);
+  padding: 6px 10px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  letter-spacing: 1px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.rs-header__actions button.primary { background: var(--pxl-accent); }
+.rs-header__actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.rs-panes {
+  padding: 6px 20px 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.rs-pane {
+  background: var(--pxl-surface-white);
+  border: 3px solid var(--pxl-frame);
+  padding: 12px 14px;
+  max-height: 480px;
+  overflow-y: auto;
+}
+.rs-pane__label {
+  font-size: 10px;
+  color: var(--pxl-text-primary);
+  letter-spacing: 2px;
+  font-weight: 500;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed var(--pxl-accent);
+  margin-bottom: 10px;
+}
+
+.rs-section-label {
+  font-size: 10px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+.rs-section-body {
+  font-size: 12px;
+  color: var(--pxl-text-primary);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+.rs-highlights { line-height: 1.7; }
+.rs-highlights__row { margin-bottom: 6px; }
+
+.rs-hint {
+  font-size: 11px;
+  color: var(--pxl-text-secondary);
+  background: var(--pxl-bg);
+  padding: 8px 10px;
+  border-left: 3px solid var(--pxl-frame-mid);
+  line-height: 1.5;
+  margin-top: 8px;
+  letter-spacing: 0.3px;
+}
+
+.rs-transcript { font-size: 11px; color: var(--pxl-text-primary); line-height: 1.55; }
+.rs-transcript__row {
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.rs-transcript__row--active {
+  background: var(--pxl-bg);
+  border-left: 4px solid var(--pxl-frame);
+  padding: 4px 6px;
+  margin: 0 -6px 8px;
+}
+
+.rs-chip {
+  color: var(--pxl-surface-white);
+  background: var(--pxl-frame-mid);
+  padding: 1px 4px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border: none;
+  cursor: pointer;
+}
+
+.rs-empty {
+  padding: 20px 12px;
+  font-size: 12px;
+  color: var(--pxl-text-secondary);
+  text-align: center;
+}
+
+.rs-bottom {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--pxl-frame);
+  font-weight: 500;
+}
+.rs-bottom .status { letter-spacing: 1.5px; }

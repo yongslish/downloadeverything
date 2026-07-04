@@ -126,6 +126,128 @@ export function DownBotIdle({ size = 100, className, 'aria-label': ariaLabel = '
   );
 }
 
+/** Processing-page Working: headphones + a keyboard clutched to the chest.
+ *  Renders in a scene at ~40x100 so pass size≈40 when embedded, or bigger for
+ *  a standalone placement. */
+export function DownBotWorking({ size = 40, className, 'aria-label': ariaLabel = 'DownBot working' }: Props) {
+  // The sprite is authored on a 40-wide, ~100-tall grid. Sized down from the
+  // 100x128 chibi so it sits comfortably inside the processing scene.
+  return (
+    <svg
+      viewBox="-4 0 48 100"
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={(size * 100) / 48}
+      style={{ shapeRendering: 'crispEdges' }}
+      role="img"
+      aria-label={ariaLabel}
+      className={className}
+    >
+      {/* antennae */}
+      <rect x="6" y="0" width="8" height="4" fill={ANT_OUT} />
+      <rect x="26" y="0" width="8" height="4" fill={ANT_OUT} />
+      <rect x="8" y="2" width="4" height="4" fill={ANT_IN} />
+      <rect x="28" y="2" width="4" height="4" fill={ANT_IN} />
+      <rect x="8" y="6" width="4" height="6" fill={OUT} />
+      <rect x="28" y="6" width="4" height="6" fill={OUT} />
+      {/* head */}
+      <rect x="0" y="12" width="40" height="4" fill={OUT} />
+      <rect x="0" y="16" width="4" height="26" fill={OUT} />
+      <rect x="36" y="16" width="4" height="26" fill={OUT} />
+      <rect x="0" y="38" width="40" height="4" fill={OUT} />
+      <rect x="4" y="16" width="32" height="22" fill={PANEL} />
+      <rect x="4" y="16" width="32" height="5" fill={HAIR} />
+      {/* eyes */}
+      <rect x="10" y="24" width="4" height="4" fill={OUT} />
+      <rect x="26" y="24" width="4" height="4" fill={OUT} />
+      <rect x="11" y="25" width="2" height="2" fill={PANEL} />
+      <rect x="27" y="25" width="2" height="2" fill={PANEL} />
+      {/* headphone cups */}
+      <rect x="-2" y="20" width="6" height="12" fill={HAIR} />
+      <rect x="36" y="20" width="6" height="12" fill={HAIR} />
+      {/* mouth */}
+      <rect x="17" y="32" width="6" height="2" fill={OUT} />
+      {/* keyboard held in front */}
+      <rect x="6" y="46" width="28" height="4" fill={OUT} />
+      <rect x="6" y="46" width="4" height="20" fill={OUT} />
+      <rect x="30" y="46" width="4" height="20" fill={OUT} />
+      <rect x="6" y="62" width="28" height="4" fill={OUT} />
+      <rect x="10" y="50" width="20" height="12" fill={PANEL} />
+      <rect x="18" y="52" width="4" height="4" fill={HAIR} />
+      <rect x="14" y="54" width="12" height="4" fill={HAIR} />
+      <rect x="16" y="58" width="8" height="2" fill={HAIR} />
+      {/* arms wrapping to keyboard */}
+      <rect x="-4" y="52" width="10" height="4" fill={HAIR} />
+      <rect x="-4" y="52" width="10" height="2" fill={OUT} />
+      <rect x="34" y="52" width="10" height="4" fill={HAIR} />
+      <rect x="34" y="52" width="10" height="2" fill={OUT} />
+      {/* torso base + skirt */}
+      <rect x="-6" y="60" width="52" height="7" fill={OUT} />
+      <rect x="-6" y="58" width="52" height="3" fill={HAIR} />
+      <rect x="4" y="66" width="32" height="4" fill={HAIR} />
+      <rect x="0" y="70" width="40" height="4" fill={HAIR} />
+      <rect x="0" y="66" width="4" height="4" fill={OUT} />
+      <rect x="36" y="66" width="4" height="4" fill={OUT} />
+      {/* legs + boots */}
+      <rect x="12" y="74" width="6" height="12" fill={OUT} />
+      <rect x="22" y="74" width="6" height="10" fill={OUT} />
+      <rect x="8" y="86" width="14" height="6" fill={OUT} />
+      <rect x="20" y="84" width="14" height="6" fill={OUT} />
+    </svg>
+  );
+}
+
+/** Result-page Complete: eyes turn to ^_^, holds a notebook, stars overhead.
+ *  Reuses the Idle silhouette; only face + accessories change. */
+export function DownBotComplete({ size = 100, className, 'aria-label': ariaLabel = 'DownBot complete' }: Props) {
+  return (
+    <SvgFrame size={size} className={className} ariaLabel={ariaLabel}>
+      {/* antennae */}
+      <rect x="30" y="0" width="8" height="8" fill={ANT_OUT} />
+      <rect x="62" y="0" width="8" height="8" fill={ANT_OUT} />
+      <rect x="32" y="2" width="4" height="4" fill={ANT_IN} />
+      <rect x="64" y="2" width="4" height="4" fill={ANT_IN} />
+      <rect x="32" y="8" width="4" height="8" fill={OUT} />
+      <rect x="64" y="8" width="4" height="8" fill={OUT} />
+      {/* celebration stars overhead */}
+      <rect x="6" y="4" width="2" height="2" fill={HEART} />
+      <rect x="4" y="6" width="6" height="2" fill={HEART} />
+      <rect x="6" y="8" width="2" height="2" fill={HEART} />
+      <rect x="90" y="4" width="2" height="2" fill={HEART} />
+      <rect x="88" y="6" width="6" height="2" fill={HEART} />
+      <rect x="90" y="8" width="2" height="2" fill={HEART} />
+      {/* head + hair (same as Idle) */}
+      <rect x="20" y="16" width="60" height="4" fill={OUT} />
+      <rect x="20" y="20" width="60" height="8" fill={HAIR} />
+      <rect x="16" y="24" width="4" height="28" fill={HAIR} />
+      <rect x="80" y="24" width="4" height="28" fill={HAIR} />
+      <rect x="20" y="20" width="4" height="32" fill={OUT} />
+      <rect x="76" y="20" width="4" height="32" fill={OUT} />
+      <rect x="24" y="28" width="52" height="24" fill={PANEL} />
+      <rect x="20" y="52" width="60" height="4" fill={OUT} />
+      {/* eyes as ^_^ curves */}
+      <rect x="30" y="34" width="2" height="2" fill={OUT} />
+      <rect x="32" y="32" width="2" height="2" fill={OUT} />
+      <rect x="34" y="34" width="2" height="2" fill={OUT} />
+      <rect x="36" y="36" width="2" height="2" fill={OUT} />
+      <rect x="38" y="34" width="2" height="2" fill={OUT} />
+      <rect x="58" y="34" width="2" height="2" fill={OUT} />
+      <rect x="60" y="32" width="2" height="2" fill={OUT} />
+      <rect x="62" y="34" width="2" height="2" fill={OUT} />
+      <rect x="64" y="36" width="2" height="2" fill={OUT} />
+      <rect x="66" y="34" width="2" height="2" fill={OUT} />
+      {/* cheeks */}
+      <rect x="26" y="42" width="4" height="4" fill={ANT_IN} />
+      <rect x="70" y="42" width="4" height="4" fill={ANT_IN} />
+      {/* smiling mouth */}
+      <rect x="40" y="46" width="2" height="2" fill={OUT} />
+      <rect x="42" y="48" width="16" height="2" fill={OUT} />
+      <rect x="58" y="46" width="2" height="2" fill={OUT} />
+      <Body />
+    </SvgFrame>
+  );
+}
+
 /** HP-03 / early-stage Thinking: head tilted -6°, floating red '?' up top. */
 export function DownBotThinking({ size = 100, className, 'aria-label': ariaLabel = 'DownBot thinking' }: Props) {
   return (

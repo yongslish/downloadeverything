@@ -1,0 +1,122 @@
+/* PR-01 · Pixel Retro 处理中 — mirrors docs/mockups/pixel-processing.html. */
+
+.pr-header {
+  padding: 14px 20px 8px;
+}
+.pr-header__label {
+  font-size: 10px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.pr-header__title {
+  font-size: 16px;
+  color: var(--pxl-text-primary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pr-header__meta {
+  font-size: 11px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.pr-scene-wrap {
+  padding: 4px 20px 12px;
+}
+
+.pr-progress-wrap {
+  padding: 4px 20px 12px;
+}
+.pr-progress {
+  background: var(--pxl-surface-white);
+  border: 3px solid var(--pxl-frame);
+  padding: 12px 14px;
+}
+.pr-progress__label {
+  font-size: 10px;
+  color: var(--pxl-text-primary);
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.pr-progress__list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--pxl-text-primary);
+  font-family: var(--font-mono);
+}
+.pr-progress__row {
+  display: flex;
+  justify-content: space-between;
+}
+.pr-progress__row--done .pr-progress__bar {
+  color: var(--pxl-text-secondary);
+  letter-spacing: 1.5px;
+}
+.pr-progress__row--current {
+  background: var(--pxl-bg);
+  padding: 4px 6px;
+  margin: -4px -6px;
+  font-weight: 500;
+}
+.pr-progress__row--current .pr-progress__bar {
+  letter-spacing: 1.5px;
+}
+.pr-progress__row--wait {
+  color: var(--pxl-text-muted);
+}
+.pr-progress__row--wait .pr-progress__bar {
+  letter-spacing: 1.5px;
+}
+.pr-progress__row--failed {
+  color: var(--pxl-danger);
+  font-weight: 500;
+}
+
+.pr-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #FCEBEB;
+  border: 3px solid var(--pxl-danger);
+  color: var(--pxl-danger);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.pr-error strong { display: block; margin-bottom: 4px; font-weight: 500; letter-spacing: 1px; }
+.pr-error__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.pr-error__actions button,
+.pr-error__actions a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 10px;
+  border: 2px solid var(--pxl-danger);
+  background: var(--pxl-surface-white);
+  color: var(--pxl-danger);
+  text-decoration: none;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.pr-bottom {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--pxl-frame);
+  font-weight: 500;
+}
+.pr-bottom .bar {
+  letter-spacing: 1px;
+  font-size: 12px;
+}

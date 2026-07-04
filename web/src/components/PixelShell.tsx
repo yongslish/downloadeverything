@@ -3,13 +3,25 @@ import { NavLink } from 'react-router-dom';
 import { useSkin, type Skin } from '../theme/skin';
 import './PixelShell.css';
 
-export type NavKey = 'start' | 'archive' | 'tools' | 'config';
+export type NavKey = 'start' | 'archive' | 'tools' | 'config' | 'loading' | 'file';
+
+interface NavItemSpec {
+  key: NavKey;
+  label: string;
+  to: string;
+}
 
 interface Props {
   active: NavKey;
   /** middle-of-top-bar label, e.g. 'downspace' | 'processing...' | 'archive'.
    *  Decoration characters (▓▒░ vs ◕◡◕ vs ✧✦) come from the current skin. */
   brandLabel?: string;
+  /** override the nav item set — processing / result pages substitute
+   *  loading / file entries. Defaults to start/archive/tools/config. */
+  navItems?: NavItemSpec[];
+  /** override the right-hand nav slug (defaults to 'v0.1a'). Processing
+   *  page uses this to show "stage 4 / 6". */
+  navRight?: ReactNode;
   /** contents of the bottom bar — pages control this because the copy differs
    *  per state (68% download vs. stage 4/6 vs. complete!). */
   bottomBar?: ReactNode;
@@ -27,7 +39,7 @@ const DECOR_RIGHT: Record<Skin, string> = {
   y2k: '✦✧',
 };
 
-const NAV_ITEMS: { key: NavKey; label: string; to: string }[] = [
+const DEFAULT_NAV_ITEMS: NavItemSpec[] = [
   { key: 'start', label: 'start', to: '/' },
   { key: 'archive', label: 'archive', to: '/archive' },
   { key: 'tools', label: 'tools', to: '/tools' },
@@ -43,7 +55,14 @@ const DEFAULT_BOTTOM_BAR = (
   </>
 );
 
-export function PixelShell({ active, brandLabel = 'downspace', bottomBar, children }: Props) {
+export function PixelShell({
+  active,
+  brandLabel = 'downspace',
+  navItems = DEFAULT_NAV_ITEMS,
+  navRight,
+  bottomBar,
+  children,
+}: Props) {
   const { skin } = useSkin();
   const left = DECOR_LEFT[skin];
   const right = DECOR_RIGHT[skin];
@@ -61,7 +80,7 @@ export function PixelShell({ active, brandLabel = 'downspace', bottomBar, childr
           <span className="close">[×]</span>
         </div>
         <nav className="pxl-nav">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <NavLink
               key={item.key}
               to={item.to}
@@ -72,7 +91,7 @@ export function PixelShell({ active, brandLabel = 'downspace', bottomBar, childr
             </NavLink>
           ))}
           <span className="spacer" />
-          <span className="version">v0.1a</span>
+          <span className="version">{navRight ?? 'v0.1a'}</span>
         </nav>
         <div className="pxl-body">{children}</div>
         <div className="pxl-bottom-bar">{bottomBar ?? DEFAULT_BOTTOM_BAR}</div>
