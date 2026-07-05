@@ -14,8 +14,12 @@ bin/yt-dlp
 __pycache__/
 *.pyc
 
-# Claude Code local settings
-.claude/
+# Claude Code local/machine-specific config — but NOT .claude/skills/,
+# which holds project skills (e.g. project-doctor) that should ship with
+# the repo so any session opened here can use them.
+.claude/settings.local.json
+.claude/launch.json
+.claude/skills/*/last-server.log
 
 # Vite build output — regenerated via `npm run web:build`.
 public/assets/
