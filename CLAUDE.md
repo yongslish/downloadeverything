@@ -1,5 +1,15 @@
 # Downspace / download-everything — agent notes
 
+## When the user asks to commit, use the ship-feature skill
+
+Don't manually re-run checks and improvise a commit message each time.
+`.claude/skills/ship-feature/` runs the full preflight (syntax, tests,
+typecheck, a live app boot, a secret scan of the staged diff) and drafts
+the commit in this project's established style (imperative subject + a
+body that explains *why*, not just what). This does not change the rule
+that commits only happen when the user asks for one in that turn — invoking
+the skill is that ask, it isn't standing permission for future commits.
+
 ## Before testing any change, run the project doctor
 
 ```bash
