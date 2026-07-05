@@ -54,10 +54,12 @@ console.log('正在项目内安装 yt-dlp 下载引擎…');
 
 // Prefer uv when available. `uv venv` skips the ensurepip step that stock
 // python3 -m venv fails on across a lot of macOS installs, and `uv pip
-// install` is dramatically faster.
+// install` is dramatically faster. --seed drops pip + setuptools into the
+// venv so downstream scripts (setup:xhs) that call `python -m pip install`
+// keep working without change.
 if (hasUv()) {
   console.log('使用 uv (绕过 ensurepip 的 macOS 坑)。');
-  run('uv', ['venv', venvDir, '--python', '3.12'].concat(process.env.PYTHON ? ['--python', process.env.PYTHON] : []));
+  run('uv', ['venv', venvDir, '--seed', '--python', '3.12'].concat(process.env.PYTHON ? ['--python', process.env.PYTHON] : []));
   run('uv', ['pip', 'install', '--python', pythonInVenv, '--upgrade', 'yt-dlp']);
 } else {
   const python = findPython();

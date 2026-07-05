@@ -9,20 +9,6 @@
       href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"
       rel="stylesheet"
     />
-    <script>
-      // Read persisted skin/theme before first paint to avoid FOUC.
-      (function () {
-        try {
-          const skin = localStorage.getItem('downspace.skin') || 'pixel-retro';
-          const theme = localStorage.getItem('downspace.theme') || 'pixel';
-          document.documentElement.setAttribute('data-skin', skin);
-          document.documentElement.setAttribute('data-theme', theme);
-        } catch (_) {
-          document.documentElement.setAttribute('data-skin', 'pixel-retro');
-          document.documentElement.setAttribute('data-theme', 'pixel');
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>

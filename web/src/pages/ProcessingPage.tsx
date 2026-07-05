@@ -145,7 +145,9 @@ export function ProcessingPage() {
   }, [id, navigate]);
 
   const stages = job ? (STAGES_BY_PLATFORM[job.platform] ?? FALLBACK_STAGES) : FALLBACK_STAGES;
-  const currentIndex = job && job.status !== 'failed' ? stageIndex(job.progress) : 0;
+  // Use the same progress-based index whether running or failed, so [!] lands
+  // on the stage that actually broke instead of always highlighting stage 1.
+  const currentIndex = job ? stageIndex(job.progress) : 0;
   const currentPct = job ? stageLocalPercent(job.progress, currentIndex) : 0;
   const failed = job?.status === 'failed';
 

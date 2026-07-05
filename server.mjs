@@ -419,8 +419,14 @@ function friendlyNoteError(error) {
   if (/FunASR.*(timeout|超时)/i.test(message)) return '本地 FunASR 转写超时，请换一个较短的内容再试。';
   if (/FFmpeg|ffmpeg/i.test(message)) return '服务器缺少 FFmpeg，暂时无法抽取音频。';
   if (/暂时还不支持/.test(message)) return message;
-  if (/小红书解析|XHS-Downloader/i.test(message)) return message;
+  if (/小红书解析|XHS-Downloader/i.test(message)) return `${message} 请先运行 npm run setup:xhs 再试。`;
   if (/aborted|cancel/i.test(message)) return '任务已经取消。';
+  // Canonical Document creation throws this exact string when every content
+  // stage came back empty: no captions, no ASR (because FunASR isn't set up),
+  // no metadata worth keeping. Point the user at the actionable fix.
+  if (/Canonical Document 至少需要一个非空文本块/.test(message)) {
+    return '该视频没有原生字幕，也没能通过 ASR 转写出任何文本。请运行 npm run setup:funasr 安装本地 ASR，或换一个有原生字幕的视频再试。';
+  }
   return message.length > 180 ? '笔记没有生成完成。请确认链接公开有效后再试一次。' : message;
 }
 

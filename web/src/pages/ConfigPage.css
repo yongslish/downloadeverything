@@ -1,0 +1,180 @@
+/* CF-01 · Pixel Retro 设置页 — mirrors docs/mockups/pixel-config.html. */
+
+.cf-body {
+  padding: 18px 22px 20px;
+}
+
+.cf-divider {
+  font-size: 10px;
+  color: var(--pxl-text-primary);
+  letter-spacing: 2.5px;
+  margin: 18px 0 10px;
+  font-weight: 500;
+}
+.cf-divider:first-child { margin-top: 0; }
+
+.cf-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  font-size: 12px;
+  color: var(--pxl-text-primary);
+  flex-wrap: wrap;
+}
+.cf-row .cf-lbl {
+  min-width: 96px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+.cf-row--start { align-items: flex-start; }
+
+.cf-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+.cf-radio .cf-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--pxl-frame);
+  box-sizing: content-box;
+}
+.cf-radio--on { font-weight: 500; }
+.cf-radio--on .cf-dot { background: var(--pxl-frame); }
+.cf-radio--disabled {
+  cursor: not-allowed;
+  color: var(--pxl-text-muted);
+}
+
+.cf-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--pxl-frame);
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.cf-input {
+  background: var(--pxl-surface-white);
+  border: 2px solid var(--pxl-frame);
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--pxl-text-primary);
+  flex: 1;
+  min-width: 0;
+}
+.cf-input:focus { outline: none; border-color: var(--pxl-frame); }
+.cf-input--narrow { flex: 0 1 220px; max-width: 260px; }
+.cf-input--vault { flex: 1; max-width: 380px; }
+.cf-input--disabled {
+  color: var(--pxl-text-muted);
+  background: var(--pxl-bg);
+  cursor: not-allowed;
+}
+
+.cf-hint {
+  font-size: 10px;
+  color: var(--pxl-text-muted);
+  letter-spacing: 0.5px;
+}
+
+.cf-provider-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 4px;
+}
+.cf-provider-list .cf-provider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 0;
+  font-size: 12px;
+}
+.cf-provider-hint {
+  font-size: 10px;
+  color: var(--pxl-text-muted);
+  margin-left: 10px;
+}
+.cf-provider-cta {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--pxl-text-secondary);
+  border: 2px solid var(--pxl-frame-mid);
+  background: transparent;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+.cf-provider-cta:hover { border-color: var(--pxl-frame); color: var(--pxl-text-primary); }
+
+.cf-textarea {
+  width: 100%;
+  min-height: 80px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.55;
+  padding: 8px 10px;
+  background: var(--pxl-surface-white);
+  border: 2px solid var(--pxl-frame);
+  color: var(--pxl-text-primary);
+  resize: vertical;
+  box-sizing: border-box;
+}
+.cf-textarea:focus { outline: none; }
+
+.cf-btn {
+  background: transparent;
+  color: var(--pxl-text-primary);
+  border: 2px solid var(--pxl-frame);
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.cf-btn:hover { background: var(--pxl-bg); }
+.cf-btn--danger {
+  color: var(--pxl-danger);
+  border-color: var(--pxl-danger);
+}
+.cf-btn--danger:hover { background: #FCEBEB; }
+.cf-btn--small {
+  padding: 4px 8px;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.cf-status {
+  font-size: 11px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 0.5px;
+}
+.cf-status--ok { color: var(--pxl-text-primary); }
+
+.cf-saved {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--pxl-frame-mid);
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.cf-select {
+  background: var(--pxl-surface-white);
+  border: 2px solid var(--pxl-frame);
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--pxl-text-primary);
+  flex: 0 1 260px;
+}
