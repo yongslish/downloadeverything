@@ -48,7 +48,12 @@ and reuses it instead of spawning a second instance.
 ## What it checks, and what to do with the result
 
 1. **yt-dlp** (`runtime/python/` + `bin/yt-dlp`) — needed for any Bilibili link.
-2. **XHS-Downloader** (`runtime/xhs-downloader/`, shares the venv from #1) — needed for any 小红书 link.
+2. **XHS-Downloader** (`runtime/xhs-downloader/`, shares the venv from #1) — needed for any 小红书 link. Beyond checking the files exist, this one also spawns
+   `python -c "from source import Settings, XHS"` with the same `PYTHONPATH` the real provider
+   uses, because file-existence checks already missed a real bug once: every file was present
+   but the import itself failed (`ModuleNotFoundError: No module named 'source'` — Python's
+   `sys.path[0]` is always the *script's own* directory, never a spawned process's `cwd`), and
+   every 小红书 submission failed despite this check reporting ✅.
 3. **Local FunASR** (`runtime/funasr/` + `runtime/funasr-models/`) — needed whenever a video has no native captions/subtitles.
 4. **Frontend build freshness** (`public/index.html` / `public/assets/` vs. `web/src/` mtimes) — catches "I edited the React code but forgot to `npm run web:build`", which has silently caused stale-bundle confusion in this project before.
 5. **Backend server** — checks `GET /api/health` on `http://127.0.0.1:3030`; if nothing answers, starts `node server.mjs` in the background (log at `.claude/skills/project-doctor/last-server.log`) and polls until healthy (or reports the log tail if it never comes up). Then hits `GET /api/notes` as a sanity check that the note pipeline's API surface actually responds.

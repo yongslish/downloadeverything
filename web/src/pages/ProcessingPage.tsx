@@ -27,6 +27,7 @@ const BUBBLE_BY_STAGE: Record<string, string> = {
   resolving: '识别平台…',
   downloading: '抓取内容…',
   extracting: '提取正文…',
+  summarizing: '生成笔记…',
   saving: '保存中…',
   done: '完成!',
 };
@@ -182,7 +183,7 @@ export function ProcessingPage() {
       </div>
 
       <div className="pr-scene-wrap">
-        <ProcessingScene bubble={bubbleFor(job)} />
+        <ProcessingScene bubble={bubbleFor(job)} stage={job?.stage} />
       </div>
 
       <div className="pr-progress-wrap">

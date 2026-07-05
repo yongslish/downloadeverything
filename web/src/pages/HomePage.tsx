@@ -126,10 +126,18 @@ export function HomePage() {
               </div>
             </div>
           )}
+          {/* Static support legend, matching every HP-0x mockup exactly: B站
+              always gets the accent fill, the two xiaohongshu pills never do.
+              This used to light up whichever pill matched the typed URL, but
+              a bare URL can't distinguish a 小红书 image post from a video
+              post pre-submission (that only resolves after the platform
+              fetches it) — so "小红书视频" would light up for image posts
+              too, looking like a wrong detection when it was really just an
+              unanswerable question asked too early. */}
           <div className={`hp-pills ${invalid ? 'hp-pills--invalid' : ''}`}>
-            <span className={`hp-pill ${platform === 'bilibili' ? 'hp-pill--bilibili' : ''}`}>B站</span>
-            <span className={`hp-pill ${platform === 'xiaohongshu' ? 'hp-pill--xhs-image' : ''}`}>小红书图文</span>
-            <span className={`hp-pill ${platform === 'xiaohongshu' ? 'hp-pill--xhs-video' : ''}`}>小红书视频</span>
+            <span className="hp-pill hp-pill--bilibili">B站</span>
+            <span className="hp-pill">小红书图文</span>
+            <span className="hp-pill">小红书视频</span>
           </div>
           {error && <div className="hp-error">{error}</div>}
         </div>
@@ -142,7 +150,7 @@ export function HomePage() {
             ── save files ────────────────────────────────
           </div>
           <div className="hp-empty">
-            <DownBotIdle size={140} className="hp-empty__bot" aria-label="DownBot" />
+            <DownBotIdle size={140} className="hp-empty__bot ds-breathing" aria-label="DownBot" />
             <div className="hp-empty__title">还没有笔记</div>
             <div className="hp-empty__hint">
               粘贴上面那条链接就能开始 · 你的第一份笔记会存在这里

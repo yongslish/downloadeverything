@@ -9,7 +9,12 @@ runtime/xhs-downloader/
 runtime/secrets.env
 runtime/setup.log
 runtime/xhs-cookie.txt
+runtime/xhs-api.log
 bin/yt-dlp
+# tesseract.js downloads these OCR model files to cwd at runtime (image-text
+# OCR for xiaohongshu notes) — same category as the FunASR/yt-dlp runtime
+# assets above, just rooted at the project root instead of runtime/.
+*.traineddata
 .DS_Store
 __pycache__/
 *.pyc

@@ -5,6 +5,7 @@ import { App } from './App';
 import { applySkinBootstrap } from './theme/bootstrap';
 import './styles/tokens.css';
 import './styles/base.css';
+import './styles/motion.css';
 
 // Must run before the first render so useSkin()'s initial state read (in
 // every PixelShell/ConfigPage instance) sees the persisted skin/theme

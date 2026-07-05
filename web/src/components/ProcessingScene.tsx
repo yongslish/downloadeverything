@@ -10,6 +10,14 @@ interface Props {
   /** Short label shown in the speech bubble. Keep under ~14 CJK chars so the
    *  text fits inside the 180-px SVG rect at fontSize 10. */
   bubble: string;
+  /** job.stage — drives which small detail animates (see docs/product-requirements.md
+   *  §八 "具体案例：处理中页面": 大模型总结阶段 = 敲键盘，屏幕上浮 Token). Every other
+   *  stage keeps the same headphones+keyboard pose (it already reads as "working" for
+   *  both ASR listening and text wrangling) but summarizing gets its own floating-token
+   *  detail so the busiest, most opaque step ("what is it doing for 10 seconds") has a
+   *  visible tell. prefers-reduced-motion is handled globally in styles/base.css, which
+   *  disables all animation/transition — nothing here needs its own media query. */
+  stage?: string;
 }
 
 // Buildings on left + right — heights vary a bit to feel like a skyline.
@@ -43,7 +51,7 @@ const WINDOWS: [number, number][] = [
 
 const STREET_DASH_XS = [20, 40, 60, 80, 100, 120, 140, 160, 180, 360, 380, 400, 420, 440, 460, 480];
 
-export function ProcessingScene({ bubble }: Props) {
+export function ProcessingScene({ bubble, stage }: Props) {
   const OUT = 'var(--pxl-frame)';
   const MID = 'var(--pxl-frame-mid)';
   const LIGHT = 'var(--pxl-bg)';
@@ -56,8 +64,20 @@ export function ProcessingScene({ bubble }: Props) {
   // Hard cap: SVG <text> doesn't wrap, so keep it inside the 180×24 rect.
   const bubbleText = bubble.length > 14 ? `${bubble.slice(0, 13)}…` : bubble;
 
+  const isSummarizing = stage === 'summarizing';
+
   return (
     <div style={{ background: BG, border: `3px solid ${OUT}`, padding: 6 }}>
+      <style>{`
+        @keyframes ds-bob { 0%, 100% { transform: translate(230px, 25px); } 50% { transform: translate(230px, 23px); } }
+        .ds-downbot { animation: ds-bob 1.6s ease-in-out infinite; }
+        @keyframes ds-trail-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .ds-trail-1 { animation: ds-trail-pulse 1.2s ease-in-out infinite; }
+        .ds-trail-2 { animation: ds-trail-pulse 1.2s ease-in-out 0.15s infinite; }
+        .ds-trail-3 { animation: ds-trail-pulse 1.2s ease-in-out 0.3s infinite; }
+        @keyframes ds-token-rise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-22px); opacity: 0; } }
+        .ds-token { animation: ds-token-rise 1.8s ease-in infinite; }
+      `}</style>
       <svg
         viewBox="0 0 520 150"
         xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +119,7 @@ export function ProcessingScene({ bubble }: Props) {
           {bubbleText}
         </text>
         {/* DownBot Working — inlined here so it participates in the scene's SVG coordinate system. */}
-        <g transform="translate(230, 25)">
+        <g className="ds-downbot">
           <rect x="6" y="0" width="8" height="4" fill={ANT_OUT} />
           <rect x="26" y="0" width="8" height="4" fill={ANT_OUT} />
           <rect x="8" y="2" width="4" height="4" fill={ANT_IN} />
@@ -144,9 +164,18 @@ export function ProcessingScene({ bubble }: Props) {
           <rect x="20" y="84" width="14" height="6" fill={OUT} />
         </g>
         {/* motion trail behind DownBot */}
-        <rect x="205" y="110" width="4" height="4" fill={OUT} />
-        <rect x="194" y="114" width="4" height="4" fill={OUT} opacity="0.6" />
-        <rect x="182" y="116" width="4" height="4" fill={OUT} opacity="0.35" />
+        <rect className="ds-trail-1" x="205" y="110" width="4" height="4" fill={OUT} />
+        <rect className="ds-trail-2" x="194" y="114" width="4" height="4" fill={OUT} opacity="0.6" />
+        <rect className="ds-trail-3" x="182" y="116" width="4" height="4" fill={OUT} opacity="0.35" />
+        {/* Floating "tokens" above her head while the LLM summary step runs —
+         *  the one stage where nothing else on screen visibly changes. */}
+        {isSummarizing && (
+          <>
+            <rect className="ds-token" x="248" y="10" width="6" height="6" fill={PANEL} stroke={OUT} strokeWidth="1" style={{ animationDelay: '0s' }} />
+            <rect className="ds-token" x="260" y="12" width="6" height="6" fill={HAIR} stroke={OUT} strokeWidth="1" style={{ animationDelay: '0.5s' }} />
+            <rect className="ds-token" x="254" y="8" width="5" height="5" fill={PANEL} stroke={OUT} strokeWidth="1" style={{ animationDelay: '1s' }} />
+          </>
+        )}
       </svg>
     </div>
   );

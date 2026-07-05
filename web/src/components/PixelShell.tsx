@@ -22,6 +22,10 @@ interface Props {
   /** override the right-hand nav slug (defaults to 'v0.1a'). Processing
    *  page uses this to show "stage 4 / 6". */
   navRight?: ReactNode;
+  /** extra class on the nav bar — result page's edit mode (RS-05) uses this
+   *  for its yellow "editing" chrome without baking that concept into the
+   *  shared shell. */
+  navClassName?: string;
   /** contents of the bottom bar — pages control this because the copy differs
    *  per state (68% download vs. stage 4/6 vs. complete!). */
   bottomBar?: ReactNode;
@@ -60,6 +64,7 @@ export function PixelShell({
   brandLabel = 'downspace',
   navItems = DEFAULT_NAV_ITEMS,
   navRight,
+  navClassName,
   bottomBar,
   children,
 }: Props) {
@@ -79,7 +84,7 @@ export function PixelShell({
           </span>
           <span className="close">[×]</span>
         </div>
-        <nav className="pxl-nav">
+        <nav className={`pxl-nav ${navClassName ?? ''}`}>
           {navItems.map((item) => (
             <NavLink
               key={item.key}

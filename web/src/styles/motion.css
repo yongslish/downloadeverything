@@ -1,0 +1,62 @@
+/* Shared micro-interactions from docs/product-requirements.md §八 "微交互":
+ * button hover lift, DownBot hover bob, copy-success pop. Global so every
+ * page's buttons/DownBot instances get them for free instead of each page
+ * re-declaring the same keyframes. prefers-reduced-motion is handled once,
+ * globally, in base.css (disables all animation/transition) — nothing here
+ * needs its own media query.
+ *
+ * Kept deliberately subtle per design-system.md §10.1's existing hover
+ * convention (color swap, no filter) — this only adds a 1px lift on top of
+ * that, not a new visual language. */
+
+/* Buttons across the app that use the standard chrome (bordered, mono font)
+ * get a slight lift on hover — design-system.md's own hover rule (color
+ * swap) already comes from each page's :hover background rule; this adds
+ * the "轻微上浮" PRD asks for without touching color tokens. */
+button:not(:disabled) {
+  transition: transform 80ms ease-out;
+}
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* DownBot sprites float gently on hover (design-system.md §10.5: "DownBot
+ * hover 时，轻微上下浮动（2px 循环），表示可交互"). Scoped to the sprite's
+ * own SVG element so it doesn't leak onto whatever wraps it. */
+@keyframes ds-hover-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+.ds-sprite:hover {
+  animation: ds-hover-float 1s ease-in-out infinite;
+  cursor: pointer;
+}
+
+/* A slower, always-on breathing loop for the empty-state DownBot — she's
+ * the entire visual focus of an empty page and PRD §八 asks empty states to
+ * read as "the mascot is pointing you toward what's next", which a
+ * perfectly static sprite undersells. */
+@keyframes ds-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.ds-breathing {
+  animation: ds-breathe 2.4s ease-in-out infinite;
+}
+
+/* Brief scale pop when a copy/share action succeeds — design-system.md
+ * §10.2 doesn't spell this one out per-pixel, but PRD §八 "微交互" asks for
+ * "复制成功：短动画反馈" explicitly. Re-triggered via a key change on the
+ * element (React remounts it), not a class toggle, so it fires every time
+ * even on repeated identical clicks. */
+@keyframes ds-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.ds-pop {
+  animation: ds-pop 260ms ease-out;
+}

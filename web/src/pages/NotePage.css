@@ -6,6 +6,19 @@
   align-items: flex-end;
   gap: 12px;
 }
+
+/* Working→Complete entrance, 800ms, once per page load — see
+ * design-system.md §10.2. Settles into a static rest state afterward so it
+ * doesn't compete with reading the actual notes. */
+@keyframes rs-complete-in {
+  0% { opacity: 0; transform: scale(0.6) translateY(6px); }
+  60% { opacity: 1; transform: scale(1.08) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.rs-complete-bot {
+  animation: rs-complete-in 800ms ease-out;
+  flex-shrink: 0;
+}
 .rs-header__main { flex: 1; min-width: 0; }
 .rs-header__label {
   font-size: 10px;
@@ -93,6 +106,15 @@
   letter-spacing: 0.3px;
 }
 
+/* Reuses the PR-02 failure palette so a summary-synthesis failure reads as
+ * the same kind of thing, not a bespoke new error style. */
+.rs-hint--error {
+  color: var(--pxl-danger);
+  background: #FCEBEB;
+  border: 2px solid var(--pxl-danger);
+  border-left-width: 3px;
+}
+
 .rs-transcript { font-size: 11px; color: var(--pxl-text-primary); line-height: 1.55; }
 .rs-transcript__row {
   margin-bottom: 8px;
@@ -133,3 +155,114 @@
   font-weight: 500;
 }
 .rs-bottom .status { letter-spacing: 1.5px; }
+
+.rs-bottom-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.rs-bottom-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.rs-link-btn {
+  background: transparent;
+  border: none;
+  color: var(--pxl-text-primary);
+  text-decoration: underline;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* RS-05 · edit mode — mirrors docs/mockups/pixel-result-edit.html. All colors
+ * are fixed to the mockup's literal yellow-highlight palette rather than
+ * design tokens, since this is a transient interaction state (not a skin
+ * variant) that looks the same across Pixel skins. */
+.pxl-nav--editing {
+  background: #FFF9C4 !important;
+}
+
+.rs-pane__flag {
+  float: right;
+  color: var(--pxl-danger);
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.rs-pane__flag--muted { color: var(--pxl-text-secondary); }
+
+.rs-edit-marker { color: var(--pxl-danger); margin-left: 4px; }
+.rs-edit-hint { color: var(--pxl-text-secondary); font-weight: 400; margin-left: 4px; }
+
+.rs-edit-field {
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFF9C4;
+  border: 2px solid var(--pxl-frame);
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--pxl-text-primary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  resize: vertical;
+}
+.rs-edit-field:focus { outline: none; }
+
+.rs-edit-point {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.rs-edit-point__text {
+  flex: 1;
+  min-width: 0;
+  background: var(--pxl-surface-white);
+  border: 1px dashed var(--pxl-accent);
+  padding: 3px 5px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--pxl-text-primary);
+}
+.rs-edit-point__text:focus { outline: none; border-style: solid; }
+.rs-edit-point__time {
+  width: 56px;
+  flex-shrink: 0;
+  background: var(--pxl-frame-mid);
+  color: var(--pxl-surface-white);
+  border: 1px dashed var(--pxl-surface-white);
+  padding: 3px 4px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-align: center;
+}
+.rs-edit-point__time:focus { outline: none; border-style: solid; }
+
+.rs-transcript__footer {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--pxl-accent);
+  font-size: 10px;
+  color: var(--pxl-text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.rs-edit-btn {
+  background: transparent;
+  color: var(--pxl-text-primary);
+  border: 2px solid var(--pxl-frame);
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.rs-edit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.rs-edit-btn--primary { background: var(--pxl-frame); color: var(--pxl-bg); }
+.rs-edit-btn--ghost { color: var(--pxl-text-secondary); border-color: var(--pxl-text-secondary); }

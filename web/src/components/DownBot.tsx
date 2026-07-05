@@ -83,7 +83,7 @@ function SvgFrame({ size, className, ariaLabel, children }: {
       style={{ shapeRendering: 'crispEdges' }}
       role="img"
       aria-label={ariaLabel}
-      className={className}
+      className={`ds-sprite ${className ?? ''}`}
     >
       {children}
     </svg>

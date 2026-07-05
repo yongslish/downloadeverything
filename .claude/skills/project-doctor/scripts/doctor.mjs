@@ -93,12 +93,37 @@ function checkYtDlp() {
   return ok('yt-dlp (Bilibili 下载引擎)', 'bin/yt-dlp + runtime/python/ 都在');
 }
 
-function checkXhsDownloader() {
+// Runs `from source import Settings, XHS` in a throwaway subprocess with the
+// exact PYTHONPATH the real xhs-provider.mjs now sets when it spawns
+// scripts/run-xhs-api.py. This is here because file-existence checks alone
+// already missed one real bug: the import used to fail with
+// "ModuleNotFoundError: No module named 'source'" (sys.path[0] is always the
+// *script's own* directory, never a spawned process's cwd — the previous cwd
+// setting did nothing for import resolution) despite every relevant file
+// being present on disk. A "yes the files exist" check would say ✅ right up
+// to the moment a real submission failed. Actually importing the module is
+// the only way to know the dependency chain is really wired up correctly.
+function importSmokeTest(venvPython, xhsSourceDir) {
+  return new Promise((resolve) => {
+    const child = spawn(
+      venvPython,
+      ['-c', 'from source import Settings, XHS'],
+      { env: { ...process.env, PYTHONPATH: xhsSourceDir }, timeout: 10_000 },
+    );
+    let stderr = '';
+    child.stderr?.on('data', (chunk) => { stderr += chunk; });
+    child.on('close', (code) => resolve({ ok: code === 0, stderr: stderr.trim() }));
+    child.on('error', (error) => resolve({ ok: false, stderr: error.message }));
+  });
+}
+
+async function checkXhsDownloader() {
   // Shares runtime/python/ with yt-dlp (see checkYtDlp) — if that venv is
   // missing or its interpreter symlink is broken, XHS-Downloader can't run
   // either, so surface the same distinction here rather than a vaguer one.
   const venvDir = rel('runtime', 'python');
   const venvPython = rel('runtime', 'python', 'bin', 'python');
+  const xhsSourceDir = rel('runtime', 'xhs-downloader');
   const mainPy = rel('runtime', 'xhs-downloader', 'main.py');
   const appPy = rel('runtime', 'xhs-downloader', 'source', 'application', 'app.py');
   if (!existsSync(venvDir)) {
@@ -110,7 +135,15 @@ function checkXhsDownloader() {
   if (!existsSync(mainPy) || !existsSync(appPy)) {
     return missing('XHS-Downloader (小红书解析)', 'runtime/xhs-downloader/ 源码不完整或缺失', 'npm run setup:xhs');
   }
-  return ok('XHS-Downloader (小红书解析)', 'runtime/xhs-downloader/ 源码 + 依赖都在');
+  const smoke = await importSmokeTest(venvPython, xhsSourceDir);
+  if (!smoke.ok) {
+    return missing(
+      'XHS-Downloader (小红书解析)',
+      `文件都在，但 'from source import Settings, XHS' 实际跑不通:\n   ${smoke.stderr.split('\n').slice(-4).join('\n   ')}`,
+      'npm run setup:xhs (依赖可能装漏了，重跑一次)',
+    );
+  }
+  return ok('XHS-Downloader (小红书解析)', 'runtime/xhs-downloader/ 源码 + 依赖都在，且真的能 import');
 }
 
 function checkFunAsr() {
@@ -228,7 +261,7 @@ async function main() {
   console.log(`\n${DIM}=== Downspace project-doctor ===${RESET}\n`);
 
   console.log(`${DIM}[Runtime dependencies]${RESET}`);
-  const depResults = [checkYtDlp(), checkXhsDownloader(), checkFunAsr()];
+  const depResults = [checkYtDlp(), await checkXhsDownloader(), checkFunAsr()];
   depResults.forEach(printResult);
 
   console.log(`\n${DIM}[Frontend build]${RESET}`);

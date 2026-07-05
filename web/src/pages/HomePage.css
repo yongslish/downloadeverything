@@ -138,8 +138,6 @@
   background: var(--pxl-bg);
 }
 .hp-pill--bilibili { background: var(--pxl-accent); }
-.hp-pill--xhs-image { background: var(--pxl-accent-4); }
-.hp-pill--xhs-video { background: var(--pxl-accent-2); }
 
 .hp-error {
   margin-top: 10px;

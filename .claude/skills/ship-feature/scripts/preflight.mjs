@@ -50,10 +50,17 @@ const SECRET_FILE_PATTERNS = [
   /\.pem$/,
   /xhs-cookie\.txt$/,
 ];
+// [^\S\n] ("whitespace but not newline") instead of \s* on either side of `=`
+// — \s matches newlines too, so `\s*\S+` on an empty `KEY=` line (common in
+// .env.example templates) was skipping past the blank line entirely and
+// matching the next non-blank character several lines down (e.g. a `#`
+// starting an unrelated comment), flagging real template files as leaks.
+// Every pattern here must stay on one line: a real secret value is never
+// wrapped across a line break in an .env file.
 const SECRET_CONTENT_PATTERNS = [
   /sk-[a-zA-Z0-9]{16,}/, // OpenAI/DeepSeek/Anthropic-shaped API keys
-  /XUNFEI_[A-Z_]*(KEY|SECRET)\s*=\s*\S+/,
-  /api[_-]?key["']?\s*[:=]\s*["'][^"']{8,}["']/i,
+  /XUNFEI_[A-Z_]*(KEY|SECRET)[^\S\n]*=[^\S\n]*\S+/,
+  /api[_-]?key["']?[^\S\n]*[:=][^\S\n]*["'][^"'\n]{8,}["']/i,
 ];
 
 function scanForSecrets() {

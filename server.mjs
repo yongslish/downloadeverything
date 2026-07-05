@@ -10,7 +10,9 @@ import { createDownloadProviderRegistry } from './lib/download/providers/index.m
 import { parseSupportedUrl } from './lib/download/url.mjs';
 import { extractAudio } from './lib/media/audio-extractor.mjs';
 import { buildNoteDocument, NOTE_PIPELINE_PLATFORMS } from './lib/content/note-pipeline.mjs';
-import { documentFilename, renderCanonicalDocumentToMarkdown } from './lib/export/markdown-exporter.mjs';
+import { isDeepSeekConfigured, synthesizeLearningNotes } from './lib/llm/deepseek-provider.mjs';
+import { documentFilename, renderCanonicalDocumentToMarkdown, sanitizeFilenameStem } from './lib/export/markdown-exporter.mjs';
+import { renderCanonicalDocumentToPlainText } from './lib/export/plaintext-exporter.mjs';
 import { getTranscriptionProvider, listTranscriptionProviders } from './lib/transcription/providers/index.mjs';
 import { createTranscriptResult } from './lib/transcription/transcript-schema.mjs';
 import { transcriptToJson, transcriptToSrt, transcriptToTxt, transcriptToVtt } from './lib/transcription/exporters.mjs';
@@ -445,8 +447,31 @@ async function runNoteJob(job) {
 
     if (job.cancelled) return;
 
+    job.stage = 'summarizing';
+    job.progress = 82;
+    job.message = '正在生成学习笔记…';
+    // A failed or unconfigured summary step degrades gracefully rather than
+    // failing the whole job — the transcript and its own metadata are still
+    // useful on their own (that's exactly what every note before this
+    // feature landed showed). document.summaryError lets the frontend
+    // explain *why* there's no summary instead of a generic placeholder.
+    if (isDeepSeekConfigured()) {
+      try {
+        job.abortController = new AbortController();
+        document.summary = await synthesizeLearningNotes(document, { signal: job.abortController.signal });
+      } catch (error) {
+        document.summaryError = error instanceof Error ? error.message : String(error);
+      } finally {
+        job.abortController = undefined;
+      }
+    } else {
+      document.summaryError = '未配置 DEEPSEEK_API_KEY，学习笔记合成已跳过。';
+    }
+
+    if (job.cancelled) return;
+
     job.stage = 'saving';
-    job.progress = 92;
+    job.progress = 96;
     job.message = '正在保存笔记…';
     const markdown = renderCanonicalDocumentToMarkdown(document);
     await notebookStore.save(document, markdown);
@@ -813,6 +838,57 @@ app.get('/api/notes/:id', async (req, res) => {
   }
 });
 
+// RS-05 edit mode: only the LLM-synthesized summary fields are editable —
+// title, author, and transcript.log stay read-only (transcript.log is
+// literally labeled "read-only" in the mockup; editing the source transcript
+// would make the "可追溯" guarantee meaningless since blockIndex references
+// would drift out from under it). A key point's `start` can be nudged
+// (docs/mockups/pixel-result-edit.html: "核心观点 (点时间戳可微调)") without
+// touching which block it's anchored to.
+function sanitizeSummaryEdit(body, existingSummary) {
+  if (!body || typeof body !== 'object') throw new Error('请求体格式不对。');
+  const summaryText = typeof body.summary === 'string' ? body.summary.trim().slice(0, 500) : '';
+  if (!summaryText) throw new Error('一句话总结不能为空。');
+
+  const existingByIndex = new Map((existingSummary?.keyPoints ?? []).map((p) => [p.blockIndex, p]));
+  const keyPoints = Array.isArray(body.keyPoints)
+    ? body.keyPoints.map((item) => {
+      const text = typeof item?.text === 'string' ? item.text.trim().slice(0, 200) : '';
+      const blockIndex = Number.isInteger(item?.blockIndex) ? item.blockIndex : null;
+      const original = blockIndex !== null ? existingByIndex.get(blockIndex) : null;
+      const start = Number.isFinite(Number(item?.start)) ? Math.max(0, Number(item.start)) : (original?.start ?? null);
+      if (!text || blockIndex === null || !original) return null;
+      return { text, start, end: original.end, blockIndex };
+    }).filter(Boolean)
+    : (existingSummary?.keyPoints ?? []);
+
+  const actionItems = Array.isArray(body.actionItems)
+    ? body.actionItems.map((item) => (typeof item === 'string' ? item.trim().slice(0, 200) : '')).filter(Boolean).slice(0, 20)
+    : (existingSummary?.actionItems ?? []);
+
+  return { ...existingSummary, summary: summaryText, keyPoints, actionItems, editedAt: new Date().toISOString() };
+}
+
+app.patch('/api/notes/:id', async (req, res) => {
+  let document;
+  try {
+    document = await notebookStore.get(req.params.id);
+  } catch {
+    return res.status(404).json({ error: '笔记不存在或已经删除。' });
+  }
+
+  try {
+    document.summary = sanitizeSummaryEdit(req.body, document.summary);
+  } catch (error) {
+    return res.status(400).json({ error: error instanceof Error ? error.message : '编辑内容不合法。' });
+  }
+
+  const markdown = renderCanonicalDocumentToMarkdown(document);
+  await notebookStore.save(document, markdown);
+  res.setHeader('Cache-Control', 'no-store');
+  return res.json(document);
+});
+
 app.get('/api/notes/:id/markdown', async (req, res) => {
   let document;
   try {
@@ -829,6 +905,24 @@ app.get('/api/notes/:id/markdown', async (req, res) => {
   return res.download(safePath, documentFilename(document), (error) => {
     if (error && !res.headersSent) res.status(404).json({ error: '这份笔记还没有生成 Markdown 导出。' });
   });
+});
+
+// Plain-text export (docs/product-requirements.md's target user pastes this into Obsidian/a doc
+// to read straight through) — no timestamps, no LLM summary, just paragraph-broken original text.
+// Rendered on demand from the stored Canonical Document rather than written to disk at save time,
+// since it's cheap to compute and unlike note.md it isn't the thing NotebookStore.save() persists.
+app.get('/api/notes/:id/text', async (req, res) => {
+  let document;
+  try {
+    document = await notebookStore.get(req.params.id);
+  } catch {
+    return res.status(404).json({ error: '笔记不存在或已经删除。' });
+  }
+  const text = renderCanonicalDocumentToPlainText(document);
+  const filename = `${sanitizeFilenameStem(document.title)}.txt`;
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(filename)}"`);
+  return res.send(text);
 });
 
 app.delete('/api/notes/:id', async (req, res) => {

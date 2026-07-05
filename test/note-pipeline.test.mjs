@@ -34,6 +34,7 @@ test('bilibili: downloads audio via ytDlpProvider then extracts, and cleans up t
   await writeFile(downloadedAudioPath, 'fake audio bytes');
 
   const fakeYtDlpProvider = {
+    ytDlpPath: '/fake/bin/yt-dlp',
     download: async (job) => {
       assert.equal(job.preset, 'audio');
       job.downloadPath = downloadedAudioPath;
@@ -58,6 +59,14 @@ test('bilibili: downloads audio via ytDlpProvider then extracts, and cleans up t
 
   assert.equal(doc, fakeDocument);
   assert.equal(extractCallArgs.downloadPath, downloadedAudioPath);
+  // Regression: this used to not be forwarded at all, so the extractor's
+  // own metadata-only yt-dlp call fell back to the bare 'yt-dlp' command
+  // name and failed with ENOENT in every environment where yt-dlp is only
+  // installed at the project-local bin/yt-dlp wrapper (i.e. always, given
+  // this project's own setup scripts) — silently, since that failure was
+  // only recorded in extraction.stagesAttempted rather than thrown. Title
+  // and author came back empty on every real note as a result.
+  assert.equal(extractCallArgs.ytDlpPath, '/fake/bin/yt-dlp');
   assert.equal(job.stage, 'extracting');
   assert.equal(job.abortController, undefined);
   // The pipeline must delete the raw downloaded media once extraction is done.

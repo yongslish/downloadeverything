@@ -72,7 +72,6 @@ test('image-text note: builds post-body/metadata blocks from title, description 
   assert.deepEqual(document.extraction.stagesAttempted, ['post-text', 'image-ocr']);
   assert.deepEqual(document.extraction.stagesUsed, ['post-text']);
   assert.equal(document.extraction.noteType, 'image');
-  assert.equal(document.extraction.postTextThin, false);
 });
 
 test('image-text note: OCR stage produces ocr blocks and populates images[].ocrText', async () => {
@@ -127,7 +126,15 @@ test('image-text note: OCR errors on one image are recorded but do not fail extr
   assert.equal(document.blocks.some((block) => block.source === 'ocr'), false);
 });
 
-test('video note with substantial post text: ASR fallback is not attempted at all', async () => {
+test('video note with a substantial caption: ASR still runs (caption length is not a substitute for a transcript)', async () => {
+  // Regression test: this used to skip ASR whenever the caption was "long
+  // enough", on the theory that a long caption already describes the video.
+  // A real 小红书 video with a ~30-character poetic caption ("大多数的放弃，
+  // 是你败给了你自己，而不是命运"——《我与地坛》) hit exactly this path in
+  // production and produced a caption-only document for a video that was
+  // never actually transcribed. Captions are rarely transcripts, regardless
+  // of length, so video notes always get ASR now — matching
+  // design-system.md's 小红书视频 = 100%-by-duration ASR cost model.
   let transcribeCalled = false;
   const document = await extractXiaohongshuNote({
     details: baseVideoDetails({
@@ -136,21 +143,28 @@ test('video note with substantial post text: ASR fallback is not attempted at al
     }),
     createDocument: fakeCreateDocument,
     videoPath: '/tmp/xhs/note-xyz/video.mp4',
+    extractAudio: async ({ inputPath, outputPath }) => ({
+      audioPath: outputPath ?? `${inputPath}.asr-audio.wav`,
+      codec: 'pcm_s16le',
+      sampleRate: 16000,
+      channels: 1,
+      usedFfmpeg: true,
+    }),
     asrProvider: {
       transcribe: async () => {
         transcribeCalled = true;
-        return { segments: [] };
+        return { segments: [{ start: 0, end: 2, text: '大家好' }] };
       },
     },
   });
 
-  assert.equal(transcribeCalled, false);
-  assert.deepEqual(document.extraction.stagesAttempted, ['post-text']);
-  assert.equal(document.extraction.postTextThin, false);
-  assert.equal(document.blocks.some((block) => block.source === 'asr'), false);
+  assert.equal(transcribeCalled, true);
+  assert.deepEqual(document.extraction.stagesAttempted, ['post-text', 'video-asr']);
+  assert.deepEqual(document.extraction.stagesUsed, ['post-text', 'video-asr']);
+  assert.equal(document.blocks.some((block) => block.source === 'asr'), true);
 });
 
-test('video note with thin post text: extracts audio and maps ASR segments to asr blocks', async () => {
+test('video note with a short/empty caption: extracts audio and maps ASR segments to asr blocks', async () => {
   const extractAudioCalls = [];
   const transcribeCalls = [];
 
@@ -191,10 +205,9 @@ test('video note with thin post text: extracts audio and maps ASR segments to as
 
   assert.deepEqual(document.extraction.stagesAttempted, ['post-text', 'video-asr']);
   assert.deepEqual(document.extraction.stagesUsed, ['video-asr']);
-  assert.equal(document.extraction.postTextThin, true);
 });
 
-test('video note with thin post text but no ASR provider: attempts the stage but skips gracefully', async () => {
+test('video note with no ASR provider: attempts the stage but skips gracefully', async () => {
   const document = await extractXiaohongshuNote({
     details: baseVideoDetails(),
     createDocument: fakeCreateDocument,
@@ -207,7 +220,7 @@ test('video note with thin post text but no ASR provider: attempts the stage but
   assert.equal(document.blocks.some((block) => block.source === 'asr'), false);
 });
 
-test('video note with thin post text but no local video path: attempts the stage but skips gracefully', async () => {
+test('video note with no local video path: attempts the stage but skips gracefully', async () => {
   const document = await extractXiaohongshuNote({
     details: baseVideoDetails(),
     createDocument: fakeCreateDocument,
