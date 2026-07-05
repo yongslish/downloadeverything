@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { access, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,6 +11,10 @@ const environmentPython = path.join(
   environmentDir,
   process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python',
 );
+
+function hasUv() {
+  return spawnSync('uv', ['--version'], { encoding: 'utf8' }).status === 0;
+}
 const requirementsPath = path.join(rootDir, 'scripts', 'requirements-funasr.txt');
 const runnerPath = path.join(rootDir, 'scripts', 'run-funasr.py');
 const model = process.env.FUNASR_MODEL || 'iic/SenseVoiceSmall';
@@ -53,11 +57,22 @@ async function main() {
 
   if (!(await exists(environmentPython))) {
     console.log('正在创建本地 FunASR Python 环境…');
-    await run(bootstrapPython, ['-m', 'venv', environmentDir]);
+    // uv sidesteps the ensurepip step that stock python3 -m venv fails on
+    // across a lot of macOS installs; prefer it if present.
+    if (hasUv()) {
+      console.log('使用 uv (绕过 ensurepip 的 macOS 坑)。');
+      await run('uv', ['venv', environmentDir, '--python', '3.12']);
+    } else {
+      await run(bootstrapPython, ['-m', 'venv', environmentDir]);
+    }
   }
 
   console.log('正在安装经过验证的 FunASR 依赖…');
-  await run(environmentPython, ['-m', 'pip', 'install', '-r', requirementsPath]);
+  if (hasUv()) {
+    await run('uv', ['pip', 'install', '--python', environmentPython, '-r', requirementsPath]);
+  } else {
+    await run(environmentPython, ['-m', 'pip', 'install', '-r', requirementsPath]);
+  }
 
   if (process.env.FUNASR_SKIP_MODEL_DOWNLOAD === '1') {
     console.log('依赖安装完成；已按 FUNASR_SKIP_MODEL_DOWNLOAD 跳过模型预下载。');

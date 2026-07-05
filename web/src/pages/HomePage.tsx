@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PixelShell } from '../components/PixelShell';
 import { DownBotIdle, DownBotThinking } from '../components/DownBot';
-import { detectPlatform, isInvalidUrl } from '../lib/url';
+import { detectPlatform, isInvalidUrl, normalizeUrl } from '../lib/url';
 import './HomePage.css';
 
 interface NoteSummary {
@@ -56,7 +56,7 @@ export function HomePage() {
       const res = await fetch('/api/notes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: url.trim() }),
+        body: JSON.stringify({ url: normalizeUrl(url) }),
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));

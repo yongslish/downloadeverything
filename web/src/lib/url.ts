@@ -32,3 +32,12 @@ export function detectPlatform(raw: string): Platform {
 export function isInvalidUrl(raw: string): boolean {
   return raw.trim().length > 0 && detectPlatform(raw) === null;
 }
+
+/** Ensure the URL sent to the server has an https:// scheme. The server's
+ *  parseSupportedUrl() requires a valid URL string and returns "链接格式不
+ *  正确" if the user pasted a bare host+path like www.bilibili.com/video/…. */
+export function normalizeUrl(raw: string): string {
+  const trimmed = raw.trim();
+  if (!trimmed) return trimmed;
+  return /^[a-z]+:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+}
