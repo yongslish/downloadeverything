@@ -7,7 +7,9 @@
 // each stage takes time ("正在整理完整文本…" etc).
 
 interface Props {
-  message: string;
+  /** Short label shown in the speech bubble. Keep under ~14 CJK chars so the
+   *  text fits inside the 180-px SVG rect at fontSize 10. */
+  bubble: string;
 }
 
 // Buildings on left + right — heights vary a bit to feel like a skyline.
@@ -41,7 +43,7 @@ const WINDOWS: [number, number][] = [
 
 const STREET_DASH_XS = [20, 40, 60, 80, 100, 120, 140, 160, 180, 360, 380, 400, 420, 440, 460, 480];
 
-export function ProcessingScene({ message }: Props) {
+export function ProcessingScene({ bubble }: Props) {
   const OUT = 'var(--pxl-frame)';
   const MID = 'var(--pxl-frame-mid)';
   const LIGHT = 'var(--pxl-bg)';
@@ -51,7 +53,8 @@ export function ProcessingScene({ message }: Props) {
   const ANT_OUT = 'var(--dbot-antenna-outer)';
   const ANT_IN = 'var(--dbot-antenna-inner)';
 
-  const bubbleText = message.length > 24 ? `${message.slice(0, 22)}…` : message;
+  // Hard cap: SVG <text> doesn't wrap, so keep it inside the 180×24 rect.
+  const bubbleText = bubble.length > 14 ? `${bubble.slice(0, 13)}…` : bubble;
 
   return (
     <div style={{ background: BG, border: `3px solid ${OUT}`, padding: 6 }}>

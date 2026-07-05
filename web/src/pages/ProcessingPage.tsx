@@ -12,9 +12,42 @@ interface Job {
   stage: string;
   progress: number;
   message: string;
+  detailMessage: string | null;
   createdAt: string | null;
   expiresAt: string | null;
   noteId: string | null;
+}
+
+// Short, always-fits-the-bubble copy per pipeline stage. The server's raw
+// message can be a full sentence (e.g. friendly error text) and would overrun
+// the 180-px SVG bubble, so we render a stage-derived label there instead and
+// keep the long copy for the header / error box below.
+const BUBBLE_BY_STAGE: Record<string, string> = {
+  queued: '排队中…',
+  resolving: '识别平台…',
+  downloading: '抓取内容…',
+  extracting: '提取正文…',
+  saving: '保存中…',
+  done: '完成!',
+};
+
+function bubbleFor(job: Job | null): string {
+  if (!job) return '正在启动…';
+  if (job.status === 'failed') return '遇到问题';
+  return BUBBLE_BY_STAGE[job.stage] ?? '处理中…';
+}
+
+// The header title showed the raw pasted URL — with query strings it easily
+// blew past the container. Trim to host + first path segment; the meta line
+// keeps the platform + job id, and the raw URL is available as tooltip text.
+function shortUrl(raw: string): string {
+  try {
+    const u = new URL(raw);
+    const seg = u.pathname.split('/').filter(Boolean).slice(0, 2).join('/');
+    return `${u.host}${seg ? `/${seg}` : ''}`;
+  } catch {
+    return raw.length > 60 ? `${raw.slice(0, 58)}…` : raw;
+  }
 }
 
 // Stage vocabularies per platform — mirror docs/design-system.md §6.2. Server
@@ -138,14 +171,16 @@ export function ProcessingPage() {
     >
       <div className="pr-header">
         <div className="pr-header__label">▲ now loading ▲</div>
-        <div className="pr-header__title">{job?.url || '正在启动…'}</div>
+        <div className="pr-header__title" title={job?.url}>
+          {job ? shortUrl(job.url) : '正在启动…'}
+        </div>
         <div className="pr-header__meta">
           {job ? `${job.platform.toLowerCase()} · job ${job.id.slice(0, 8)}` : ''}
         </div>
       </div>
 
       <div className="pr-scene-wrap">
-        <ProcessingScene message={job?.message || '正在启动…'} />
+        <ProcessingScene bubble={bubbleFor(job)} />
       </div>
 
       <div className="pr-progress-wrap">
@@ -182,6 +217,12 @@ export function ProcessingPage() {
             <div className="pr-error" role="alert">
               <strong>处理失败</strong>
               {job.message || '未知错误'}
+              {job.detailMessage && job.detailMessage !== job.message && (
+                <details className="pr-error__detail">
+                  <summary>▸ 展开原始错误</summary>
+                  <pre>{job.detailMessage}</pre>
+                </details>
+              )}
               <div className="pr-error__actions">
                 <Link to="/">▶ 回首页</Link>
                 <Link to="/config">? 配置</Link>

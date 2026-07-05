@@ -108,6 +108,32 @@
   cursor: pointer;
 }
 
+.pr-error__detail {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+.pr-error__detail summary {
+  cursor: pointer;
+  color: var(--pxl-danger);
+  letter-spacing: 0.5px;
+  padding: 2px 0;
+  user-select: none;
+}
+.pr-error__detail pre {
+  margin: 6px 0 0;
+  padding: 8px;
+  background: var(--pxl-surface-white);
+  border: 1px solid var(--pxl-danger);
+  color: #791F1F;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 220px;
+  overflow: auto;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
 .pr-bottom {
   display: flex;
   align-items: center;

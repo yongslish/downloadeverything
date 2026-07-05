@@ -151,6 +151,7 @@ function publicNoteJob(job) {
     stage: job.stage,
     progress: job.progress,
     message: job.message,
+    detailMessage: job.status === 'failed' ? job.detailMessage || null : null,
     createdAt: job.createdAt,
     expiresAt: job.expiresAt,
     noteId: job.status === 'ready' ? job.noteId : null,
@@ -454,6 +455,12 @@ async function runNoteJob(job) {
     if (!job.cancelled) {
       job.status = 'failed';
       job.message = friendlyNoteError(error);
+      // Preserve the raw error for the frontend "详情" line so the user can see
+      // what actually failed (e.g. yt-dlp exit code + URL) instead of only the
+      // friendly one-liner. Truncated to keep the API payload small.
+      const rawMessage = error instanceof Error ? error.message : String(error);
+      job.detailMessage = rawMessage.length > 800 ? `${rawMessage.slice(0, 800)}…` : rawMessage;
+      console.error(`[note ${job.id}] failed:`, rawMessage);
       scheduleNoteJobExpiry(job);
     }
   }
