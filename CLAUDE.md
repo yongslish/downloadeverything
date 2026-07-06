@@ -1,16 +1,27 @@
 # Downspace / download-everything — agent notes
 
-## When the user asks to commit, use the ship-feature skill
+This project has three project-scoped skills under `.claude/skills/` that
+exist specifically to stop re-deriving the same multi-step sequences by
+hand every session. Use them instead of manually chaining the equivalent
+`npm run ...` commands:
 
-Don't manually re-run checks and improvise a commit message each time.
-`.claude/skills/ship-feature/` runs the full preflight (syntax, tests,
-typecheck, a live app boot, a secret scan of the staged diff) and drafts
-the commit in this project's established style (imperative subject + a
-body that explains *why*, not just what). This does not change the rule
-that commits only happen when the user asks for one in that turn — invoking
-the skill is that ask, it isn't standing permission for future commits.
+## To start/test the app, use start-app (not a manual npm chain)
 
-## Before testing any change, run the project doctor
+```bash
+npm run start-app
+```
+
+Rebuilds the frontend if `web/src/` has changed since the last build, then
+delegates to project-doctor for dependency checks and starting/health-
+checking the Express server. This is the single entry point for "get me
+to a testable app" — use it any time you're about to say "let's test this
+in the browser" instead of separately remembering `npm run web:build`,
+then `npm start`, then checking whether port 3030 is already taken. It's
+linked to project-doctor (calls it as its last step) rather than a
+separate copy of its logic, so the two never disagree about what "healthy"
+means. Full skill: `.claude/skills/start-app/`.
+
+## To check what's broken, use project-doctor
 
 ```bash
 npm run doctor
@@ -24,16 +35,26 @@ anything itself — installs are slow (FunASR alone downloads ~1GB of model
 weights) — it only tells you the exact `npm run setup:*` command to run for
 whatever's missing.
 
-Run this instead of manually starting the server or re-deriving setup
-commands, and run it again any time a processing job fails with an error
-you haven't already diagnosed — most real failures here trace back to one
-of these Python environments being missing, or having a broken interpreter
-symlink after a Homebrew Python upgrade (see
-`.claude/skills/project-doctor/SKILL.md` for the full detail on that
-failure pattern; it's bitten this project more than once).
+Run this any time a processing job fails with an error you haven't already
+diagnosed — most real failures here trace back to one of these Python
+environments being missing, or having a broken interpreter symlink after a
+Homebrew Python upgrade (see `.claude/skills/project-doctor/SKILL.md` for
+the full detail on that failure pattern; it's bitten this project more
+than once). `start-app` already calls this, so you don't need to run both
+back to back — reach for `doctor` directly when you specifically want the
+diagnostic report and don't need/want the frontend rebuilt or the server
+touched.
 
-Full skill: `.claude/skills/project-doctor/` (invoke via the Skill tool as
-`project-doctor`, or just run `npm run doctor` directly — same script).
+## When the user asks to commit, use the ship-feature skill
+
+Don't manually re-run checks and improvise a commit message each time.
+`.claude/skills/ship-feature/` runs the full preflight (syntax, tests,
+typecheck, a live app boot via project-doctor, a secret scan of the staged
+diff) and drafts the commit in this project's established style
+(imperative subject + a body that explains *why*, not just what). This
+does not change the rule that commits only happen when the user asks for
+one in that turn — invoking the skill is that ask, it isn't standing
+permission for future commits.
 
 ## Architecture at a glance
 
